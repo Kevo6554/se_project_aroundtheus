@@ -38,4 +38,14 @@
   background: transparent url(../images/like-button.svg) center no-repeat;
   width: 21px;
   height: 18px;
+  border: none;
+}
+
+.card__like-button:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+
+.card__title {
+  font-weight: 900;
 }
