@@ -47,7 +47,7 @@
   line-height: 22px;
   font-weight: 400;
   grid-area: description;
-  margin: 0;
+  margin-top: 7px;
 }
 
 .profile__image {
@@ -74,6 +74,9 @@
   .profile__description {
     width: 100%;
     text-align: center;
+    font-size: 14px;
+    line-height: 17px;
+    margin: 0 19px 36px;
   }
 
   .profile__add-button {
@@ -88,8 +91,11 @@
 
   .footer__copyright {
     width: 282px;
-    height: 14px;
-    margin: 0 19px 36px;
+
     padding: 0;
+  }
+
+  .profile__image {
+    margin: 0 80px 32px 82px;
   }
 }
