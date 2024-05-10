@@ -3,7 +3,7 @@
   margin-top: 50px;
 }
 
-.card__list {
+.cards__list {
   display: grid;
   justify-content: center;
   grid-template-columns: repeat(auto-fit, 282px);
@@ -39,6 +39,7 @@
   width: 21px;
   height: 18px;
   border: none;
+  transition: ease;
 }
 
 .card__like-button:hover {
@@ -51,6 +52,8 @@
   max-width: 220px;
   line-height: 29px;
   font-size: 24px;
-
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
   margin: 0;
 }
