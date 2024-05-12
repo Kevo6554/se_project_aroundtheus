@@ -106,9 +106,7 @@
   .profile__title {
     font-size: 22px;
     line-height: 27px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    max-width: 196px;
   }
   .profile__image {
     margin: 0 auto 32px;
