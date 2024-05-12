@@ -37,3 +37,7 @@ Your footer copyright.
 # 6. My Beautiful Video LOL.
 
 https://youtu.be/qJXidUsksIc
+
+# 7. Github pages
+
+https://kevo6554.github.io/se_project_aroundtheus/
