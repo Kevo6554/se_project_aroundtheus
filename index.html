@@ -9,6 +9,7 @@
 
     <title>Around The U.S</title>
     <link href="./pages/index.css" rel="stylesheet" />
+    <link rel="stylesheet" href="path/to/modal.css" />
   </head>
   <body class="page">
     <div class="page__content">
@@ -114,8 +115,23 @@
         <button class="modal__close"></button>
         <p class="modal__heading">Edit Profile</p>
         <form class="modal__form">
-          <input type="text" name="title" />
-          <input type="text" name="description" />
+          <input
+            type="text"
+            name="title"
+            required
+            class="modal__input"
+            id="name"
+            placeholder="Jacques Cousteau"
+          />
+          <input
+            type="text"
+            name="description"
+            required
+            class="modal__input"
+            id="description"
+            placeholder="Explorer"
+          />
+
           <button class="modal__button">Save</button>
         </form>
       </div>
