@@ -59,22 +59,58 @@
 }
 
 .modal__input {
-  border: 1px;
-
+  border: none;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   font-size: 14px;
   line-height: 17px;
-}
 
-.line {
-  border: 1px solid black;
-  opacity: 20%;
-  margin-top: 13px;
   margin-bottom: 29px;
 }
+
 .modal__button {
   height: 50px;
   background-color: black;
   color: white;
-  margin-top: 48px;
+  margin-top: 38px;
   border-radius: 2px;
+  font-size: 18px;
+  line-height: 22px;
+}
+
+@media screen and (max-width: 595px) {
+  .modal__close {
+    height: 26px;
+    width: 26px;
+    margin-bottom: 13px;
+    left: 245px;
+  }
+
+  .modal__container {
+    width: 282px;
+    height: 322px;
+  }
+
+  .modal__heading {
+    height: 22px;
+    width: 238px;
+    font-size: 18px;
+    line-height: 22px;
+    margin-left: 22px;
+    margin-top: 25px;
+  }
+
+  .modal__form {
+    width: 238px;
+    margin-left: 22px;
+  }
+
+  .modal__input {
+    height: 27px;
+  }
+
+  .modal__button {
+    height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
 }
