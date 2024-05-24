@@ -17,7 +17,7 @@
 
 .modal__container {
   position: relative;
-  padding: 36px;
+  padding: 0;
   background-color: #fff;
   margin: auto;
   border-radius: 10px;
@@ -47,27 +47,34 @@
   font-size: 24px;
   line-height: 29px;
   margin-bottom: 54px;
+  margin-top: 34px;
+  margin-left: 36px;
 }
 
 .modal__form {
   display: flex;
   flex-direction: column;
-
+  margin-left: 36px;
   width: 358px;
 }
 
 .modal__input {
   border: 1px;
-  margin-bottom: 29px;
+
   font-size: 14px;
   line-height: 17px;
-  border-bottom: 1px solid;
 }
 
+.line {
+  border: 1px solid black;
+  opacity: 20%;
+  margin-top: 13px;
+  margin-bottom: 29px;
+}
 .modal__button {
   height: 50px;
   background-color: black;
   color: white;
   margin-top: 48px;
-  border: 2px;
+  border-radius: 2px;
 }
