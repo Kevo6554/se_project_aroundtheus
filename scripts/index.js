@@ -38,7 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
     "#profile-description-input"
   );
   const profileEditForm = profileEditModal.querySelector(".modal__form");
-  const cardListEl = document.querySelector(".card__list");
+  const cardListEl = document.querySelector(".cards__list");
   const cardTemplate =
     document.querySelector("#card-template").content.firstElementChild;
   /*Functions*/
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function closePopup() {
     profileEditModal.classList.remove("modal_opened");
   }
-
+  console.log("DOM fully loaded and parsed");
   function getCardElement(cardData) {
     const cardElement = cardTemplate.cloneNode(true);
     const cardImageEl = cardElement.querySelector(".card__image");
