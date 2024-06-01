@@ -53,6 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardTitleEl = cardElement.querySelector(".card__title");
     cardTitleEl.textContent = cardData.name;
     cardImageEl.src = cardData.link;
+    cardImageEl.alt = cardData.image;
 
     return cardElement;
   }
@@ -70,9 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     profileEditModal.classList.add("modal_opened");
   });
 
-  profileCloseButton.addEventListener("click", () => {
-    closePopup();
-  });
+  profileCloseButton.addEventListener("click", closePopup);
 
   profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
