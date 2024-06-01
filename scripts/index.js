@@ -46,12 +46,14 @@ document.addEventListener("DOMContentLoaded", () => {
   function closePopup() {
     profileEditModal.classList.remove("modal_opened");
   }
-  console.log("DOM fully loaded and parsed");
+
   function getCardElement(cardData) {
     const cardElement = cardTemplate.cloneNode(true);
     const cardImageEl = cardElement.querySelector(".card__image");
     const cardTitleEl = cardElement.querySelector(".card__title");
     cardTitleEl.textContent = cardData.name;
+    cardImageEl.src = cardData.link;
+
     return cardElement;
   }
 
@@ -76,6 +78,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initialCards.forEach((cardData) => {
     const cardElement = getCardElement(cardData);
-    cardListEl.prepend(cardElement);
+    cardListEl.append(cardElement);
   });
 });
