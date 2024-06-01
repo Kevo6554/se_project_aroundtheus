@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileEditForm = profileEditModal.querySelector(".modal__form");
   const cardListEl = document.querySelector(".card__list");
   const cardTemplate =
-    document.querySelector("#card-template").textContent.firstElementChild;
+    document.querySelector("#card-template").content.firstElementChild;
   /*Functions*/
 
   function closePopup() {
@@ -48,7 +48,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   function getCardElement(cardData) {
-    const cardElemant = cardTemplate.cloneNode(true);
+    const cardElement = cardTemplate.cloneNode(true);
     const cardImageEl = cardElement.querySelector(".card__image");
     const cardTitleEl = cardElement.querySelector(".card__title");
     cardTitleEl.textContent = cardData.name;
@@ -69,8 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   profileCloseButton.addEventListener("click", () => {
-    profileEditModal.classList.add("modal_close");
-    profileEditModal.classList.remove("modal_opened");
     closePopup();
   });
 
@@ -78,6 +76,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   initialCards.forEach((cardData) => {
     const cardElement = getCardElement(cardData);
-    cardListEl.append(cardElement);
+    cardListEl.prepend(cardElement);
   });
 });
