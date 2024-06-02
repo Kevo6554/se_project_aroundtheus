@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardTitleEl = cardElement.querySelector(".card__title");
     cardTitleEl.textContent = cardData.name;
     cardImageEl.src = cardData.link;
-    cardImageEl.alt = cardData.image;
+    cardImageEl.alt = cardData.name;
 
     return cardElement;
   }
