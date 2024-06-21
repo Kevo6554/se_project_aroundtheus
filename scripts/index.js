@@ -79,4 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const cardElement = getCardElement(cardData);
     cardListEl.append(cardElement);
   });
+
+  initialCards.forEach((cardsData) => 
+  {cardsWrap.prepend(getCardElemenet(cardData));
 });
