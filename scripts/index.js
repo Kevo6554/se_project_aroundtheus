@@ -52,8 +52,8 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 /*Functions*/
 
-function closePopup() {
-  profileEditModal.classList.remove("modal_opened");
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
 }
 
 function getCardElement(cardData) {

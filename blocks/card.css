@@ -12,6 +12,10 @@
   height: 282px;
 }
 
+.card__trash-button {
+  background: transparent url(../images/Trash.svg) center no-repeat;
+}
+
 .card__description {
   display: flex;
   background-color: white;
