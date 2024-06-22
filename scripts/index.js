@@ -73,10 +73,12 @@ function getCardElement(cardData) {
     likeButton.classList.toggle("card__like-button_active");
   });
   const cardDeleteButton = cardElement.querySelector(".card__trash-button");
-  cardDeleteButton.addEventListener("click"),
-    () => {
-      cardElement.remove();
-    };
+  cardDeleteButton.addEventListener("click", () => cardElement.remove());
+
+  const cardPopup = cardElement.querySelector(".card__popup");
+  cardPopup.addEventListener("click", () => {
+    cardAddModal.classList.add("modal_opened");
+  });
   cardTitleEl.textContent = cardData.name;
   cardImageEl.src = cardData.link;
   cardImageEl.alt = cardData.name;
