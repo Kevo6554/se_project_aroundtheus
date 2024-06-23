@@ -63,7 +63,7 @@ const cardUrlInput = addCardFormElement.querySelector(".modal__input_type_url");
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
-  const cardListEl = document.querySelector(".card__list");
+  const cardListEl = document.querySelector(".cards__list");
   cardListEl.prepend(cardElement);
 }
 //closepopup
@@ -111,6 +111,7 @@ function handleAddCardFormSubmit(e) {
   });
   closePopup(cardAddModal);
 }
+document.handleAddCardFormSubmit(".modal__form").reset();
 
 //Event Listeners
 profileEditButton.addEventListener("click", () => {
