@@ -9,10 +9,19 @@
   bottom: 0;
   right: 0;
   left: 0;
+  visibility: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: visibility 0s 0.5s, opacity 0.5s linear;
+  display: flex;
 }
 
 .modal_opened {
   display: flex;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: all;
+  transition: visibility 0s, opacity 0.5s linear;
 }
 
 .modal__container {
@@ -28,7 +37,6 @@
 .modal__close {
   border: none;
   background-color: transparent;
-  cursor: pointer;
   position: absolute;
   bottom: calc(100% + 5px);
   left: calc(100% + 5px);
@@ -37,6 +45,10 @@
   background-image: url(../images/Close-Icon.svg);
   background-repeat: no-repeat;
   background-size: contain;
+}
+.modal__close:hover {
+  cursor: pointer;
+  opacity: 0.6;
 }
 
 .modal__heading {
