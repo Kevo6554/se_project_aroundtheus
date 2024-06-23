@@ -82,6 +82,20 @@
   opacity: 0.8;
 }
 
+.modal__image {
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
+}
+
+.modal__container_type_picture {
+  max-height: 75vw;
+  max-width: 75vw;
+  height: auto;
+  width: auto;
+  background-color: transparent;
+}
+
 @media screen and (max-width: 595px) {
   .modal__close {
     height: 26px;
