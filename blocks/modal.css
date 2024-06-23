@@ -95,6 +95,10 @@
   width: auto;
   background-color: transparent;
 }
+#picture-close-button {
+  bottom: calc(100% - 90px);
+  left: calc(100% - 75px);
+}
 
 @media screen and (max-width: 595px) {
   .modal__close {
@@ -131,5 +135,9 @@
     height: 46px;
     font-size: 14px;
     line-height: 17px;
+  }
+  #picture-close-button {
+    height: 30px;
+    width: 30px;
   }
 }
