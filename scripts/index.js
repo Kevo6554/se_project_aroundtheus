@@ -105,7 +105,7 @@ function handleAddCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  const cardElement = getCardElement({
+  const cardElement = renderCard({
     name,
     link,
   });
