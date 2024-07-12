@@ -3,24 +3,18 @@ console.log("hello from validation.js");
 // enabling validation by calling enableValidation()
 
 // pass all the settings on call
-function showInputError(
-  formEL,
-  inputEL,
-  errorMessageEL,
-  inputErrorClass,
-  errorClass
-) {
+function showInputError(formEL, inputEL, options) {
   const errorMessageEl = formEL.querySelector(`#${inputEL.id}-error`);
-  inputEL.classList.add(inputErrorClass);
-  errorMessageEL.textContent = inputEL.validationMessage;
-  errorMessageEL.classList.add(errorClass);
+  inputEL.classList.add(options.inputErrorClass);
+  errorMessageEl.textContent = inputEL.validationMessage;
+  errorMessageEl.classList.add(options.errorClass);
 }
 
 function hideInputError(formEL, inputEL, inputErrorClass, errorClass) {
   const errorMessageEl = formEL.querySelector(`#${inputEL.id}-error`);
-  inputEL.classList.remove(inputErrorClass);
+  inputEL.classList.remove(options.inputErrorClass);
   errorMessageEl.textContent = "";
-  errorMessageEl.classList.remove(errorClass);
+  errorMessageEl.classList.remove(options.errorClass);
 }
 
 function checkInputValidity(formEL, inputEL, options) {
@@ -32,6 +26,15 @@ function checkInputValidity(formEL, inputEL, options) {
 
 function hasInvalidInput(inputList) {
   return inputList.every((inputEL) => inputEL.validity.valid);
+}
+function enableButton() {
+  submitBtn.classList.add(inactiveButtonClass);
+  submitBtn.disabled = true;
+}
+
+function disableButton() {
+  submitBtn.classList.remove(inactiveButtonClass);
+  submitBtn.disabled = false;
 }
 
 function toggleButtonState(inputEls, submitBtn, inactiveButtonClass) {
@@ -48,11 +51,11 @@ const setEventListeners = (formEl, options) => {
   const { inputSelector } = options.inputSelector;
 
   const submitButton = formEl.querySelector(".modal__button");
-  const inputEl = [...formEl.querySelectorAll(options.inputSelector)];
-  inputEl.forEach((inputEl) => {
+  const inputEls = [...formEl.querySelectorAll(options.inputSelector)];
+  inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, options);
-      toggleButtonState(inputEl, submitButton, options);
+      toggleButtonState(inputEls, submitButton, options);
     });
   });
 };
