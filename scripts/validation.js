@@ -37,12 +37,12 @@ function disableButton() {
   submitBtn.disabled = false;
 }
 
-function toggleButtonState(inputEls, submitBtn, inactiveButtonClass) {
+function toggleButtonState(inputEls, submitBtn, options) {
   if (hasInvalidInput(inputEls)) {
-    submitBtn.classList.add(inactiveButtonClass);
+    submitBtn.classList.add(options.inactiveButtonClass);
     submitBtn.disabled = true;
   } else {
-    submitBtn.classList.remove(inactiveButtonClass);
+    submitBtn.classList.remove(options.inactiveButtonClass);
     submitBtn.disabled = false;
   }
 }
