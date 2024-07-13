@@ -68,24 +68,55 @@ function renderCard(cardData) {
 //closepopup
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
-  document.addEventListener("click", handleOutsideClick);
+  document.removeEventListener("keyup", closeModalOnEscape);
 }
 
 function openPopup(modal) {
   modal.classList.add("modal_opened");
-  document.removeEventListener("click", handleOutsideClick);
+  document.addEventListener("keyup", closeModalOnEscape);
 }
 
-function handleOutsideClick(event) {
-  if (
-    !modal.contains(event.target) &&
-    !event.target.closest(".modal") &&
-    !event.target.classList.contains(".modal__button")
-  ) {
-    closePopup();
+function closeModalOnEscape(e) {
+  e.preventDefault();
+  const modal = e.target.querySelector(".modal_opened");
+  closePopup(modal);
+}
+
+function closeModalOnClick(e) {
+  e.preventDefault();
+  const modal = e.target.querySelector(".modal_opened");
+  closePopup(modal);
+}
+/*
+function closeModalOnEvent(event) {
+  const modals = document.querySelectorAll(".modal");
+
+  console.log("Event type:", event.type, event); // Log event type and event
+
+  if (event.type === "keydown" && event.key === "Escape") {
+    console.log("Escape key pressed");
+    modals.forEach((modal) => {
+      closePopup(modal);
+      console.log("Closed modal on Escape key");
+    });
+  }
+
+  if (event.type === "click") {
+    console.log("Click event target:", event.target); // Log event target
+    modals.forEach((modal) => {
+      if (!modal.contains(event.target)) {
+        closePopup(modal);
+        console.log("Closed modal on click outside");
+      }
+    });
   }
 }
+*/
 
+// Add event listeners
+/*
+document.addEventListener("keydown", closeModalOnEscape);
+document.addEventListener("click", closeModalOnEv);*/
 function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
@@ -135,10 +166,7 @@ profileEditButton.addEventListener("click", (handleAddCardFormSubmit) => {
   openPopup(profileEditModal);
 });
 
-cardAddButton.addEventListener("click", () => {
-  disableButton(cardDisableButton, validationConfig.inactiveButtonClass);
-  openPopup(cardAddModal);
-});
+cardAddButton.addEventListener("click", () => openPopup(cardAddModal));
 
 profileCloseButton.addEventListener("click", () =>
   closePopup(profileEditModal)

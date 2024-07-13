@@ -4,13 +4,17 @@ console.log("hello from validation.js");
 
 // pass all the settings on call
 function showInputError(formEL, inputEL, options) {
-  const errorMessageEl = formEL.querySelector(`#${inputEL.id}-error`);
+  const selector = `${inputEL.id}-error`;
   console.log(`Selector: ${selector}`);
+  const errorMessageEl = formEL.querySelector(`#${selector}`);
+  if (!errorMessageEl) {
+    console.error(`Element not found in the DOM: ${selector}`);
+    return;
+  }
   inputEL.classList.add(options.inputErrorClass);
   errorMessageEl.textContent = inputEL.validationMessage;
   errorMessageEl.classList.add(options.errorClass);
 }
-
 function hideInputError(formEL, inputEL, options) {
   const errorMessageEl = formEL.querySelector(`#${inputEL.id}-error`);
   inputEL.classList.remove(options.inputErrorClass);
