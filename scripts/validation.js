@@ -5,6 +5,7 @@ console.log("hello from validation.js");
 // pass all the settings on call
 function showInputError(formEL, inputEL, options) {
   const errorMessageEl = formEL.querySelector(`#${inputEL.id}-error`);
+  console.log(`Selector: ${selector}`);
   inputEL.classList.add(options.inputErrorClass);
   errorMessageEl.textContent = inputEL.validationMessage;
   errorMessageEl.classList.add(options.errorClass);
@@ -27,14 +28,15 @@ function checkInputValidity(formEL, inputEL, options) {
 function hasInvalidInput(inputList) {
   return inputList.every((inputEL) => inputEL.validity.valid);
 }
-function enableButton() {
-  submitBtn.classList.add(inactiveButtonClass);
-  submitBtn.disabled = true;
-}
 
 function disableButton() {
-  submitBtn.classList.remove(inactiveButtonClass);
-  submitBtn.disabled = false;
+  if (!isValid) {
+    button.classList.add("modal__button_disabled");
+    button.disabled = true;
+  } else {
+    button.classList.remove("modal__button_disabled");
+    button.disabled = false;
+  }
 }
 
 function toggleButtonState(inputEls, submitBtn, options) {

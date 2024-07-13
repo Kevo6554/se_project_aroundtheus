@@ -28,6 +28,8 @@ const initialCards = [
 
 console.log(initialCards);
 
+const modal = document.querySelector(".modal");
+
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileCloseButton = profileEditModal.querySelector(
@@ -55,7 +57,7 @@ const cardTemplate =
   document.querySelector("#card-template").content.firstElementChild;
 const cardTitleInput = cardAddForm.querySelector(".modal__input_type_title");
 const cardUrlInput = cardAddForm.querySelector(".modal__input_type_url");
-
+const cardDisableButton = cardAddForm.querySelector("modal__button_disabled");
 /*Functions*/
 
 function renderCard(cardData) {
@@ -66,9 +68,22 @@ function renderCard(cardData) {
 //closepopup
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
+  document.addEventListener("click", handleOutsideClick);
 }
+
 function openPopup(modal) {
   modal.classList.add("modal_opened");
+  document.removeEventListener("click", handleOutsideClick);
+}
+
+function handleOutsideClick(event) {
+  if (
+    !modal.contains(event.target) &&
+    !event.target.closest(".modal") &&
+    !event.target.classList.contains(".modal__button")
+  ) {
+    closePopup();
+  }
 }
 
 function handleProfileEditSubmit(e) {
@@ -121,6 +136,7 @@ profileEditButton.addEventListener("click", (handleAddCardFormSubmit) => {
 });
 
 cardAddButton.addEventListener("click", () => {
+  disableButton(cardDisableButton, validationConfig.inactiveButtonClass);
   openPopup(cardAddModal);
 });
 
