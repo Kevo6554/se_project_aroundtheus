@@ -74,6 +74,7 @@ function closePopup(modal) {
 function openPopup(modal) {
   modal.classList.add("modal_opened");
   document.addEventListener("keyup", closeModalOnEscape);
+  modal.addEventListener("click", closeModalOnClick);
 }
 
 function closeModalOnEscape(e) {
@@ -85,7 +86,7 @@ function closeModalOnEscape(e) {
 function closeModalOnClick(e) {
   e.preventDefault();
   const modal = e.target.querySelector(".modal_opened");
-  closePopup(modal);
+  closePopup(e.target);
 }
 /*
 function closeModalOnEvent(event) {

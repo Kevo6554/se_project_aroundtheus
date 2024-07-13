@@ -44,6 +44,7 @@ function disableButton() {
 }
 
 function toggleButtonState(inputEls, submitBtn, options) {
+  const submitButton = formEl.querySelector(".modal__button");
   if (hasInvalidInput(inputEls)) {
     submitBtn.classList.add(options.inactiveButtonClass);
     submitBtn.disabled = true;
