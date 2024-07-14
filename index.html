@@ -53,13 +53,9 @@
     <!-- Edit Modal-->
     <div id="profile-edit-modal" class="modal">
       <div class="modal__container">
-        <button
-          id="profile-close-button"
-          class="modal__close"
-          onclick="closePopup(document.querySelector('.modal'))"
-        ></button>
+        <button id="profile-close-button" class="modal__close"></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form" novalidate>
+        <form class="modal__form" disable-on-load>
           <input
             type="text"
             name="title"
@@ -86,10 +82,9 @@
             maxlength="200"
             required
           />
-          <span
-            id="profile-description-input-error"
-            class="modal__error"
-          ></span>
+          <span id="profile-description-input-error" class="modal__error-input"
+            >Please enter a web</span
+          >
 
           <button
             type="submit"
@@ -125,7 +120,13 @@
             placeholder="Image URL"
           />
 
-          <button type="submit" class="modal__button">Create</button>
+          <button
+            type="submit"
+            class="modal__button modal__button_disabled"
+            disabled
+          >
+            Create
+          </button>
         </form>
       </div>
     </div>

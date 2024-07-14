@@ -79,6 +79,10 @@
   margin-bottom: 29px;
 }
 
+.modal__input:invalid {
+  border: 1px solid red;
+}
+
 .modal__button {
   height: 50px;
   background-color: black;
@@ -113,9 +117,22 @@
 }
 .modal__error {
   position: absolute;
-  padding: 35px 0;
+  padding: 40px 0;
   color: red;
   font-size: 12px;
+}
+
+.modal__error-input {
+  position: absolute;
+  padding: 100px 0;
+  color: red;
+  font-size: 12px;
+}
+
+.modal__button_disabled {
+  background-color: grey;
+  pointer-events: none;
+  opacity: 0.2;
 }
 
 @media screen and (max-width: 595px) {

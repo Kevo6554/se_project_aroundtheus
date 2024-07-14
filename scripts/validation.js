@@ -28,9 +28,8 @@ function checkInputValidity(formEL, inputEL, options) {
   }
   hideInputError(formEL, inputEL, options);
 }
-
-function hasInvalidInput(inputList) {
-  return inputList.every((inputEL) => inputEL.validity.valid);
+function hasInvalidInput(inputEls) {
+  return Array.from(inputEls).some((inputEl) => !inputEl.validity.valid);
 }
 
 function disableButton() {
@@ -39,12 +38,11 @@ function disableButton() {
     button.disabled = true;
   } else {
     button.classList.remove("modal__button_disabled");
-    button.disabled = false;
+    button.disabled = true;
   }
 }
 
 function toggleButtonState(inputEls, submitBtn, options) {
-  const submitButton = formEl.querySelector(".modal__button");
   if (hasInvalidInput(inputEls)) {
     submitBtn.classList.add(options.inactiveButtonClass);
     submitBtn.disabled = true;

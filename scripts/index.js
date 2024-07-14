@@ -28,8 +28,6 @@ const initialCards = [
 
 console.log(initialCards);
 
-const modal = document.querySelector(".modal");
-
 const profileEditButton = document.querySelector("#profile-edit-button");
 const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileCloseButton = profileEditModal.querySelector(
@@ -58,6 +56,7 @@ const cardTemplate =
 const cardTitleInput = cardAddForm.querySelector(".modal__input_type_title");
 const cardUrlInput = cardAddForm.querySelector(".modal__input_type_url");
 const cardDisableButton = cardAddForm.querySelector("modal__button_disabled");
+
 /*Functions*/
 
 function renderCard(cardData) {
@@ -79,7 +78,7 @@ function openPopup(modal) {
 
 function closeModalOnEscape(e) {
   e.preventDefault();
-  const modal = e.target.querySelector(".modal_opened");
+  const modal = document.querySelector(".modal_opened");
   closePopup(modal);
 }
 
@@ -182,3 +181,20 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handleAddCardFormSubmit);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+
+profileEditModal.addEventListener("submit", function (event) {
+  event.preventDefault();
+
+  // Get the values from the input fields
+  const title = inputTitle.value;
+  const description = inputDescription.value;
+  console.log("Title:", title);
+  console.log("Description:", description);
+
+  // Update the profile titles
+  profileTitle.textContent = title;
+  profileDescription.textContent = description;
+
+  // Optional: Close the modal
+  profileEditModal.classList.remove("modal_opened");
+});
