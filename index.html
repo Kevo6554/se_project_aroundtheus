@@ -55,7 +55,7 @@
       <div class="modal__container">
         <button id="profile-close-button" class="modal__close"></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form" disable-on-load>
+        <form class="modal__form" disabled>
           <input
             type="text"
             name="title"
@@ -82,7 +82,7 @@
             maxlength="200"
             required
           />
-          <span id="profile-description-input-error" class="modal__error-input"
+          <span id="edit-description-input-error" class="modal__error"
             >Please enter a web</span
           >
 
@@ -107,18 +107,30 @@
             name="title"
             required
             class="modal__input modal__input_type_title"
-            id="profile-title-input"
+            id="card-name-input"
             placeholder="title"
+            maxlength="40"
+            minlength="2"
+            required
           />
+          <span class="modal__error" id="edit-title-input-error"
+            >Please fill out this field</span
+          >
 
           <input
             type="url"
             name="link"
             required
             class="modal__input modal__input_type_url"
-            id="profile-description-input"
+            id="card-link-input "
             placeholder="Image URL"
+            minlength="2"
+            maxlength="200"
+            required
           />
+          <span id="profile-description-input-error" class="modal__error"
+            >Please enter a web</span
+          >
 
           <button
             type="submit"

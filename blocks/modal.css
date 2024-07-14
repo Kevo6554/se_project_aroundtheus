@@ -122,13 +122,6 @@
   font-size: 12px;
 }
 
-.modal__error-input {
-  position: absolute;
-  padding: 100px 0;
-  color: red;
-  font-size: 12px;
-}
-
 .modal__button_disabled {
   background-color: grey;
   pointer-events: none;
