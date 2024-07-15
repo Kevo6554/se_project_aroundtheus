@@ -69,6 +69,12 @@
   width: 358px;
 }
 
+.modal__label {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
 .modal__input {
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -117,9 +123,14 @@
 }
 .modal__error {
   position: absolute;
-  padding: 40px 0;
+  top: 35px;
   color: red;
   font-size: 12px;
+  visibility: hidden;
+}
+
+.modal__error_visible {
+  visibility: visible;
 }
 
 .modal__button_disabled {

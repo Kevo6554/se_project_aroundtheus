@@ -3,6 +3,35 @@ console.log("hello from validation.js");
 // enabling validation by calling enableValidation()
 
 // pass all the settings on call
+
+profileEditModal.addEventListener("submit", function (evt) {
+  evt.preventDefault();
+
+  // Validate the input values
+  let isValid = true;
+
+  if (!nameInput.validity.valid) {
+    showInputError(profileTitleInput);
+    isValid = false;
+  } else {
+    hideInputError(profileTitleInput);
+  }
+
+  if (!descriptionInput.validity.valid) {
+    showInputError(profileDescriptionInput);
+    isValid = false;
+  } else {
+    hideInputError(profileDescriptionInput);
+  }
+
+  // Update the profile display if the form is valid
+  if (isValid) {
+    profileTitle.textContent = profileTitleInput.value;
+    profileDescription.textContent = profileDescriptionInput.value;
+  }
+  closePopup();
+});
+
 function showInputError(formEL, inputEL, options) {
   const selector = `${inputEL.id}-error`;
   console.log(`Selector: ${selector}`);
@@ -14,6 +43,7 @@ function showInputError(formEL, inputEL, options) {
   inputEL.classList.add(options.inputErrorClass);
   errorMessageEl.textContent = inputEL.validationMessage;
   errorMessageEl.classList.add(options.errorClass);
+  errorMessageEl.style.visibility = "visible";
 }
 function hideInputError(formEL, inputEL, options) {
   const errorMessageEl = formEL.querySelector(`#${inputEL.id}-error`);
@@ -57,6 +87,7 @@ const setEventListeners = (formEl, options) => {
 
   const submitButton = formEl.querySelector(".modal__button");
   const inputEls = [...formEl.querySelectorAll(options.inputSelector)];
+  toggleButtonState(inputEls, submitButton, options);
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, options);
@@ -64,6 +95,15 @@ const setEventListeners = (formEl, options) => {
     });
   });
 };
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal__error_visible",
+};
+enableValidation(config);
 function enableValidation(options) {
   const formEls = [...document.querySelectorAll(options.formSelector)];
 
@@ -71,16 +111,6 @@ function enableValidation(options) {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-    setEventListeners(fieldEl, options);
+    setEventListeners(formEl, options);
   });
-
-  const config = {
-    formSelector: ".modal__form",
-    inputSelector: ".modal__input",
-    submitButtonSelector: ".modal__button",
-    inactiveButtonClass: "modal__button_disabled",
-    inputErrorClass: "modal__input_type_error",
-    errorClass: "modal__error_visible",
-  };
-  enableValidation(config);
 }
