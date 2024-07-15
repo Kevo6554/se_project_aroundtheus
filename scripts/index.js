@@ -181,20 +181,3 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handleAddCardFormSubmit);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
-
-profileEditModal.addEventListener("submit", function (event) {
-  event.preventDefault();
-
-  // Get the values from the input fields
-  const title = inputTitle.value;
-  const description = inputDescription.value;
-  console.log("Title:", title);
-  console.log("Description:", description);
-
-  // Update the profile titles
-  profileTitle.textContent = title;
-  profileDescription.textContent = description;
-
-  // Optional: Close the modal
-  profileEditModal.classList.remove("modal_opened");
-});
