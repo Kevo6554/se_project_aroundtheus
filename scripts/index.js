@@ -118,7 +118,6 @@ function closeModalOnEvent(event) {
 document.addEventListener("keydown", closeModalOnEscape);
 document.addEventListener("click", closeModalOnEv);*/
 function handleProfileEditSubmit(e) {
-  debugger;
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
@@ -149,7 +148,6 @@ function getCardElement(cardData) {
   return cardElement;
 }
 function handleAddCardFormSubmit(e) {
-  debugger;
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;

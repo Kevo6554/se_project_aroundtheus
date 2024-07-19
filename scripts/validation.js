@@ -4,34 +4,6 @@ console.log("hello from validation.js");
 
 // pass all the settings on call
 
-profileEditModal.addEventListener("submit", function (evt) {
-  evt.preventDefault();
-
-  // Validate the input values
-  let isValid = true;
-
-  if (!nameInput.validity.valid) {
-    showInputError(profileTitleInput);
-    isValid = false;
-  } else {
-    hideInputError(profileTitleInput);
-  }
-
-  if (!descriptionInput.validity.valid) {
-    showInputError(profileDescriptionInput);
-    isValid = false;
-  } else {
-    hideInputError(profileDescriptionInput);
-  }
-
-  // Update the profile display if the form is valid
-  if (isValid) {
-    profileTitle.textContent = profileTitleInput.value;
-    profileDescription.textContent = profileDescriptionInput.value;
-  }
-  closePopup();
-});
-
 function showInputError(formEL, inputEL, options) {
   const selector = `${inputEL.id}-error`;
   console.log(`Selector: ${selector}`);
