@@ -34,16 +34,6 @@ function hasInvalidInput(inputEls) {
   return Array.from(inputEls).some((inputEl) => !inputEl.validity.valid);
 }
 
-function disableButton() {
-  if (!isValid) {
-    button.classList.add("modal__button_disabled");
-    button.disabled = true;
-  } else {
-    button.classList.remove("modal__button_disabled");
-    button.disabled = true;
-  }
-}
-
 function toggleButtonState(inputEls, submitBtn, options) {
   if (hasInvalidInput(inputEls)) {
     submitBtn.classList.add(options.inactiveButtonClass);
