@@ -56,18 +56,19 @@ const cardTemplate =
 const cardTitleInput = cardAddForm.querySelector(".modal__input_type_title");
 const cardUrlInput = cardAddForm.querySelector(".modal__input_type_url");
 const cardDisableButton = cardAddForm.querySelector("modal__button_disabled");
+const cardPopUpCaption = cardPopup.querySelector(".modal__heading");
 
 /*Functions*/
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
-  const cardListEl = document.querySelector(".cards__list");
   cardListEl.prepend(cardElement);
 }
 //closepopup
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keyup", closeModalOnEscape);
+  modal.removeEventListener("click", closeModalOnClick);
 }
 
 function openPopup(modal) {
@@ -139,6 +140,7 @@ function getCardElement(cardData) {
     openPopup(cardPopup);
     cardPopupImg.src = cardData.link;
     cardPopupImg.alt = cardData.name;
+    cardPopUpCaption.textContent = cardData.name;
   });
 
   cardTitleEl.textContent = cardData.name;
@@ -151,7 +153,7 @@ function handleAddCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
-  const cardElement = renderCard({
+  renderCard({
     name,
     link,
   });
