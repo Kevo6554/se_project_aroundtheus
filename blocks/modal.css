@@ -120,6 +120,7 @@
 .modal__close-picture {
   bottom: calc(100% - 100px);
   left: calc(100% - 55px);
+  position: ;
 }
 .modal__error {
   position: absolute;
@@ -138,7 +139,17 @@
   pointer-events: none;
   opacity: 0.2;
 }
-
+.modal__heading_caption {
+  color: #fff;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 14px;
+  width: 291px;
+  height: 12px;
+  position: relative;
+  top: 540px;
+  right: 35px;
+}
 @media screen and (max-width: 595px) {
   .modal__close {
     height: 26px;
