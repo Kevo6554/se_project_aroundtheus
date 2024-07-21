@@ -107,10 +107,12 @@
   width: 90%;
   height: 90%;
   object-fit: contain;
+  max-height: 75vh;
+  max-width: 75vw;
 }
 
 .modal__container_type_picture {
-  max-height: 75vw;
+  max-height: 75vh;
   max-width: 75vw;
   height: auto;
   width: auto;
@@ -145,8 +147,8 @@
   line-height: 14px;
   width: 100%;
   position: absolute;
-  margin-right: auto;
-  margin-top: 450px;
+  margin: 0;
+  top: calc(100% + 10px);
 }
 @media screen and (max-width: 595px) {
   .modal__close {
