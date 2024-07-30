@@ -1,3 +1,6 @@
+import Card from "./Cards.js";
+import FormValidator from "./FormValidator.js";
+
 const initialCards = [
   {
     name: "Yosemite Valley",
@@ -26,6 +29,12 @@ const initialCards = [
   },
 ];
 
+const cardData = {
+  name: "Yosemite Valley",
+  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+};
+const card = newCard(cardData, "#card-template");
+card.getView();
 console.log(initialCards);
 
 const profileEditButton = document.querySelector("#profile-edit-button");
