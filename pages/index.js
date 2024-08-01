@@ -33,8 +33,8 @@ const cardData = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
-const card = newCard(cardData, "#card-template");
-card.getView();
+const card = newCard("#card-template");
+const cardElement = card.getTemplate();
 console.log(initialCards);
 
 const profileEditButton = document.querySelector("#profile-edit-button");
