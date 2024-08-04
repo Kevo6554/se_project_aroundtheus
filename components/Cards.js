@@ -20,7 +20,7 @@ export default class Card {
       });
 
     this._cardElement.addEventListener("click", () => {
-      this._handleImageClick(this);
+      this._handleImageClick(this._name, this._link);
     });
   }
 
@@ -34,30 +34,15 @@ export default class Card {
       .classList.toggle(".card__like-button_active");
   }
 
-  _handleImageClick() {
-    thid._cardElement
-      .querySelector("#card__description-text")
-      .classList.toggle("");
-  }
-
   getTemplate() {
     this._cardElement = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card")
       .cloneNode(true);
-    return cardElement;
-  }
-
-  generateCard() {
-    this._element = this.getTemplate;
     this._element.querySelector(".card__image").src = this._link;
     this._element.querySelector(".card__description").textContent = this._name;
-    return this._element;
+    this._cardElement.querySelector(".card__image").alt = this._name;
+    this._setEventListeners();
+    return this._cardElement;
   }
 }
-
-initialCards.forEach((item) => {
-  const card = new Card(item, "#card-template");
-  const cardElement = card.generateCard();
-  document.body.append(cardElement);
-});

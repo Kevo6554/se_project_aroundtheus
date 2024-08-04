@@ -1,5 +1,22 @@
-import Card from "./Cards.js";
-import FormValidator from "./FormValidator.js";
+import Card from "../components/Cards.js";
+import FormValidator from "../components/FormValidator.js";
+const profileForm = document.querySelector("#profile-edit-modal .modal__form");
+const newCardForm = document.querySelector("#profile-add-modal .modal__form");
+
+const validationConfig = {
+  inputSelector: ".modal__form-input",
+  submitButtonSelector: ".modal__button",
+  inactiveButtonClass: "modal__button_disabled",
+  inputErrorClass: "modal__input_type_error",
+  errorClass: "modal_error_visible",
+};
+
+const profileFormValidator = new FormValidator(validationConfig, profileForm);
+const newCardFormValidator = new FormValidator(validationConfig, newCardForm);
+
+// Enable validation for both forms
+profileFormValidator.enableValidation();
+newCardFormValidator.enableValidation();
 
 const initialCards = [
   {
@@ -33,8 +50,8 @@ const cardData = {
   name: "Yosemite Valley",
   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
 };
-const card = newCard("#card-template");
-const cardElement = card.getTemplate();
+const card = new Card("#card-template");
+
 console.log(initialCards);
 
 const profileEditButton = document.querySelector("#profile-edit-button");
