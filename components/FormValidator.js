@@ -11,6 +11,7 @@ class FormValidator {
   _setEventListeners() {
     this._inputEls.forEach((inputEL) => {
       inputEL.addEventListener("input", () => {
+        console.log("keystroke");
         this._checkInputValidity(inputEL);
         this._toggleButtonState();
       });
@@ -18,24 +19,24 @@ class FormValidator {
   }
 
   _showInputError(inputEL) {
-    const errorMessageEl = formEL.querySelector(`${selector}-error`);
+    const errorMessageEl = this._formEL.querySelector(`#${inputEL.id}-error`);
     inputEL.classList.add(this._inputErrorClass);
-    errorMessageEl.textContent = validationMessage;
+    errorMessageEl.textContent = inputEL.validationMessage;
     errorMessageEl.classList.add(this._errorClass);
   }
 
   _hideInputError(inputEL) {
-    const inputErrorMessageEl = formEL.querySelector(`#${inputEL.id}-error`);
+    const errorMessageEl = this._formEL.querySelector(`#${inputEL.id}-error`);
     inputEL.classList.remove(this._inputErrorClass);
-    inputErrorMessageEl.textContent = "";
-    inputErrorMessageEl.classList.remove(this._errorClass);
+    errorMessageEl.textContent = "";
+    errorMessageEl.classList.remove(this._errorClass);
   }
 
   _checkInputValidity(inputEL) {
     if (!inputEL.validity.valid) {
-      this._showInputError(inputEL, inputEL.validationMessage);
+      this._showInputError(inputEL);
     } else {
-      this._hasInvalidInput(inputEL);
+      this._hideInputError(inputEL);
     }
   }
 

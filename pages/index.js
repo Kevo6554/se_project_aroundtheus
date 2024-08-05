@@ -1,18 +1,13 @@
 import Card from "../components/Cards.js";
-import FormValidator from "./FormValidator.js";
+import FormValidator from "../components/FormValidator.js";
 
 const validationConfig = {
-  inputSelector: ".modal__form-input",
+  inputSelector: ".modal__input",
   submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
-  errorClass: "modal_error_visible",
+  errorClass: "modal__error_visible",
 };
-
-const formValidator = new FormValidator(options, formEL);
-
-// Enable form validation
-formValidator.enableValidation();
 
 const initialCards = [
   {
@@ -80,6 +75,15 @@ const cardUrlInput = cardAddForm.querySelector(".modal__input_type_url");
 const cardDisableButton = cardAddForm.querySelector("modal__button_disabled");
 const cardPopUpCaption = cardPopup.querySelector(".modal__heading");
 
+const addCardFormValidator = new FormValidator(validationConfig, cardAddForm);
+const profileEditValidator = new FormValidator(
+  validationConfig,
+  profileEditForm
+);
+
+// Enable form validation
+addCardFormValidator.enableValidation();
+profileEditValidator.enableValidation();
 /*Functions*/
 
 function renderCard(cardData) {

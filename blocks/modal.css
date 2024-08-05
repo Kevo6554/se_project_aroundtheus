@@ -82,7 +82,7 @@
   line-height: 17px;
   height: 28px;
 
-  margin-bottom: 29px;
+  margin-bottom: 31px;
 }
 
 .modal__input:invalid {
@@ -93,7 +93,7 @@
   height: 50px;
   background-color: black;
   color: white;
-  margin-top: 38px;
+  margin-top: 20px;
   border-radius: 2px;
   font-size: 18px;
   line-height: 22px;
