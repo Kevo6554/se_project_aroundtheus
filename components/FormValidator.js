@@ -15,8 +15,6 @@ class FormValidator {
         this._toggleButtonState();
       });
     });
-
-    this._toggleButtonState(); // Initial button state
   }
 
   _showInputError(inputEL) {

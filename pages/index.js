@@ -1,7 +1,5 @@
 import Card from "../components/Cards.js";
-import FormValidator from "../components/FormValidator.js";
-const profileForm = document.querySelector("#profile-edit-modal .modal__form");
-const newCardForm = document.querySelector("#profile-add-modal .modal__form");
+import FormValidator from "./FormValidator.js";
 
 const validationConfig = {
   inputSelector: ".modal__form-input",
@@ -11,12 +9,10 @@ const validationConfig = {
   errorClass: "modal_error_visible",
 };
 
-const profileFormValidator = new FormValidator(validationConfig, profileForm);
-const newCardFormValidator = new FormValidator(validationConfig, newCardForm);
+const formValidator = new FormValidator(options, formEL);
 
-// Enable validation for both forms
-profileFormValidator.enableValidation();
-newCardFormValidator.enableValidation();
+// Enable form validation
+formValidator.enableValidation();
 
 const initialCards = [
   {
