@@ -37,11 +37,7 @@ const initialCards = [
   },
 ];
 
-const cardData = {
-  name: "Yosemite Valley",
-  link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-};
-const card = new Card("#card-template");
+renderCard(initialCards);
 
 console.log(initialCards);
 
@@ -86,9 +82,10 @@ addCardFormValidator.enableValidation();
 profileEditValidator.enableValidation();
 /*Functions*/
 
-function renderCard(cardData) {
-  const cardElement = getCardElement(cardData);
-  cardListEl.prepend(cardElement);
+function renderCard(data) {
+  const card = new Card(data, "#card-template");
+  const cardElement = card.generateCard();
+  document.querySelector(".cards__list").append(cardElement);
 }
 //closepopup
 function closePopup(modal) {
@@ -151,30 +148,6 @@ function handleProfileEditSubmit(e) {
   closePopup(profileEditModal);
 }
 
-function getCardElement(cardData) {
-  const cardElement = cardTemplate.cloneNode(true);
-  const cardImageEl = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__title");
-
-  const likeButton = cardElement.querySelector(".card__like-button");
-  likeButton.addEventListener("click", () => {
-    likeButton.classList.toggle("card__like-button_active");
-  });
-  const cardDeleteButton = cardElement.querySelector(".card__trash-button");
-  cardDeleteButton.addEventListener("click", () => cardElement.remove());
-  cardImageEl.addEventListener("click", () => {
-    openPopup(cardPopup);
-    cardPopupImg.src = cardData.link;
-    cardPopupImg.alt = cardData.name;
-    cardPopUpCaption.textContent = cardData.name;
-  });
-
-  cardTitleEl.textContent = cardData.name;
-  cardImageEl.src = cardData.link;
-  cardImageEl.alt = cardData.name;
-
-  return cardElement;
-}
 function handleAddCardFormSubmit(e) {
   e.preventDefault();
   const name = cardTitleInput.value;
@@ -209,4 +182,4 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handleAddCardFormSubmit);
 console.log(profileEditForm, cardAddForm);
 
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+initialCards.forEach((data) => renderCard(data, cardListEl));
