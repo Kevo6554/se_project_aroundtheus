@@ -1,7 +1,7 @@
 class FormValidator {
   constructor(options, formEL) {
     this._errorClass = options.errorClass;
-    this._inputErrorClass = options.inputerrorClass;
+    this._inputErrorClass = options.inputErrorClass;
     this._inactiveButtonClass = options.inactiveButtonClass;
     this._formEL = formEL;
 
