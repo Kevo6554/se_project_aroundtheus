@@ -82,11 +82,13 @@ addCardFormValidator.enableValidation();
 profileEditValidator.enableValidation();
 /*Functions*/
 
-function renderCard(data) {
-  const card = new Card(data, "#card-template");
-  const cardElement = card.generateCard();
-  document.querySelector(".cards__list").append(cardElement);
+function handleImageClick(data) {
+  openPopup(cardPopup);
+  cardPopupImg.src = data._link;
+  cardPopupImg.alt = data._name;
+  cardPopUpCaption.textContent = data._name;
 }
+
 //closepopup
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
@@ -111,6 +113,7 @@ function closeModalOnClick(e) {
     closePopup(e.target);
   }
 }
+
 /*
 function closeModalOnEvent(event) {
   const modals = document.querySelectorAll(".modal");
@@ -160,6 +163,12 @@ function handleAddCardFormSubmit(e) {
   cardAddForm.reset();
 }
 
+function renderCard(data) {
+  const card = new Card(data, "#card-template", handleImageClick);
+  const cardElement = card.generateCard();
+  document.querySelector(".cards__list").append(cardElement);
+}
+
 //Event Listeners
 profileEditButton.addEventListener("click", () => {
   profileTitleInput.value = profileTitle.textContent;
@@ -182,4 +191,4 @@ profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 cardAddForm.addEventListener("submit", handleAddCardFormSubmit);
 console.log(profileEditForm, cardAddForm);
 
-initialCards.forEach((data) => renderCard(data, cardListEl));
+initialCards.forEach((cardData) => renderCard(cardData, cardListEl));

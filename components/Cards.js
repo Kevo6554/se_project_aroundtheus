@@ -24,15 +24,8 @@ export default class Card {
     this._cardElement
       .querySelector(".card__image")
       .addEventListener("click", () => {
-        openPopup(cardPopup);
-        cardPopupImg.src = this._link;
-        cardPopupImg.alt = this._name;
-        cardPopupCaption.textContent = this._name;
+        this._handleImageClick(this);
       });
-
-    this._cardElement.addEventListener("click", () => {
-      this._handleImageClick(this._name, this._link);
-    });
   }
 
   _handleTrashButton() {
