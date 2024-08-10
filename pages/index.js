@@ -37,8 +37,6 @@ const initialCards = [
   },
 ];
 
-renderCard(initialCards);
-
 console.log(initialCards);
 
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -161,13 +159,13 @@ function handleAddCardFormSubmit(e) {
     link,
   });
   closePopup(cardAddModal);
-  cardAddForm.reset();
+  cardAddForm.resetValidation();
 }
 
 function renderCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
   const cardElement = card.generateCard();
-  document.querySelector(".cards__list").append(cardElement);
+  cardListEl.prepend(cardElement);
 }
 
 //Event Listeners
