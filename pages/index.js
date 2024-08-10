@@ -163,9 +163,12 @@ function handleAddCardFormSubmit(e) {
 }
 
 function renderCard(data) {
+  cardListEl.prepend(createCard(data));
+}
+
+function createCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
-  const cardElement = card.generateCard();
-  cardListEl.prepend(cardElement);
+  return card.generateCard();
 }
 
 //Event Listeners
