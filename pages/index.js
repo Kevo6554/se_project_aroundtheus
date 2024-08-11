@@ -159,7 +159,7 @@ function handleAddCardFormSubmit(e) {
     link,
   });
   closePopup(cardAddModal);
-  cardAddForm.resetValidation();
+  addCardFormValidator.resetValidation();
 }
 
 function renderCard(data) {
