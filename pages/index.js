@@ -82,9 +82,9 @@ profileEditValidator.enableValidation();
 
 function handleImageClick(data) {
   openPopup(cardPopup);
-  cardPopupImg.src = data._link;
-  cardPopupImg.alt = data._name;
-  cardPopUpCaption.textContent = data._name;
+  cardPopupImg.src = data.link;
+  cardPopupImg.alt = data.name;
+  cardPopUpCaption.textContent = data.name;
 }
 
 //closepopup
@@ -159,7 +159,7 @@ function handleAddCardFormSubmit(e) {
     link,
   });
   closePopup(cardAddModal);
-  addCardFormValidator.resetValidation();
+  addCardFormValidator._toggleButtonState();
 }
 
 function renderCard(data) {
