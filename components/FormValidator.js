@@ -13,7 +13,7 @@ class FormValidator {
       inputEL.addEventListener("input", () => {
         console.log("keystroke");
         this._checkInputValidity(inputEL);
-        this._toggleButtonState();
+        this.toggleButtonState();
       });
     });
   }
@@ -46,7 +46,7 @@ class FormValidator {
     });
   }
 
-  _toggleButtonState() {
+  toggleButtonState() {
     if (this._hasInvalidInput()) {
       this._submitBtn.classList.add(this._inactiveButtonClass);
       this._submitBtn.disabled = true;

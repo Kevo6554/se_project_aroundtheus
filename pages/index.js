@@ -144,7 +144,8 @@ document.addEventListener("keydown", closeModalOnEscape);
 document.addEventListener("click", closeModalOnEv);*/
 
 function handleProfileEditSubmit(e) {
-  e.preventDefault();
+  e.preventDefault.reset();
+  e.target.reset();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
   closePopup(profileEditModal);
@@ -152,6 +153,7 @@ function handleProfileEditSubmit(e) {
 
 function handleAddCardFormSubmit(e) {
   e.preventDefault();
+  e.target.reset();
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({
@@ -159,7 +161,7 @@ function handleAddCardFormSubmit(e) {
     link,
   });
   closePopup(cardAddModal);
-  addCardFormValidator._toggleButtonState();
+  addCardFormValidator.toggleButtonState();
 }
 
 function renderCard(data) {
