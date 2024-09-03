@@ -1,6 +1,10 @@
 import Card from "../components/Cards.js";
 import FormValidator from "../components/FormValidator.js";
 import "../pages/index.css";
+import Popup from "../components/Popup.js";
+import PopupWithForm from "../components/Popupwithform.js";
+import Section from "../components/Section.js";
+import UserInfo from "../components/UserInfo.js";
 
 const validationConfig = {
   inputSelector: ".modal__input",
@@ -76,6 +80,17 @@ const profileEditValidator = new FormValidator(
   profileEditForm
 );
 
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (data) => {
+      cardList.addItem(createCard(data));
+    },
+  },
+  ".cards__list"
+);
+const userInfo = new UserInfo(".profile__info");
+
 // Enable form validation
 addCardFormValidator.enableValidation();
 profileEditValidator.enableValidation();
@@ -83,9 +98,6 @@ profileEditValidator.enableValidation();
 
 function handleImageClick(data) {
   openPopup(cardPopup);
-  cardPopupImg.src = data.link;
-  cardPopupImg.alt = data.name;
-  cardPopUpCaption.textContent = data.name;
 }
 
 //closepopup
