@@ -99,8 +99,6 @@ profileEditValidator.enableValidation();
 function handleImageClick(data) {
   openPopup(cardPopup);
 }
-
-//closepopup
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
   document.removeEventListener("keyup", closeModalOnEscape);
@@ -124,6 +122,8 @@ function closeModalOnClick(e) {
     closePopup(e.target);
   }
 }
+
+//closepopup
 
 /*
 function closeModalOnEvent(event) {
