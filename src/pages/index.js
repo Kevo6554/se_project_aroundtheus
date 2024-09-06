@@ -89,7 +89,18 @@ const cardList = new Section(
   },
   ".cards__list"
 );
-const userInfo = new UserInfo(".profile__info");
+const popupSelector = ".modal";
+const userInfo = new UserInfo(".modal__label");
+const modalWithFormInstance = new PopupWithForm({
+  popupSelector: "#picture-add-modal",
+  handleFormSubmit: handleAddCardFormSubmit,
+});
+const editProfileModal = new ModalWithForm({
+  popupSelector: "#profile-edit-modal",
+  handleFormSubmit: handleProfileEditSubmit,
+});
+editProfileModal.setEventListeners();
+const modalImage = new PopupWithImage(popupSelector);
 
 // Enable form validation
 addCardFormValidator.enableValidation();
