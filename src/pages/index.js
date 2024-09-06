@@ -5,6 +5,7 @@ import Popup from "../components/Popup.js";
 import PopupWithForm from "../components/Popupwithform.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
 
 const validationConfig = {
   inputSelector: ".modal__input",
@@ -95,12 +96,17 @@ const modalWithFormInstance = new PopupWithForm({
   popupSelector: "#picture-add-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
-const editProfileModal = new ModalWithForm({
+modalWithFormInstance.open();
+const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: handleProfileEditSubmit,
 });
 editProfileModal.setEventListeners();
-const modalImage = new PopupWithImage(popupSelector);
+
+const imagePopup = new PopupWithImage({
+  popupSelector: "#profile-add-modal",
+});
+imagePopup.setEventListeners();
 
 // Enable form validation
 addCardFormValidator.enableValidation();
