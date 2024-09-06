@@ -114,7 +114,7 @@ profileEditValidator.enableValidation();
 /*Functions*/
 
 function handleImageClick(data) {
-  openPopup(cardPopup);
+  imagePopup.open(data);
 }
 function closePopup(modal) {
   modal.classList.remove("modal_opened");
