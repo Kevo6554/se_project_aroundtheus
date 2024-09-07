@@ -14,7 +14,7 @@ export default class Popup {
     this._popupElement.classList.add("modal_opened");
     document.addEventListener("keydown", this._handleEscClose);
   }
-  _handleEscClose(e) {
+  _handleEscClose(evt) {
     evt.preventDefault();
     if (evt.key === "Escape") {
       this.close();
