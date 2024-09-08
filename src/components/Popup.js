@@ -2,7 +2,6 @@ export default class Popup {
   constructor({ popupSelector }) {
     this._popupElement = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._closeButton = this._popupElement.querySelector(".modal__close");
   }
 
   close() {
@@ -20,13 +19,12 @@ export default class Popup {
       this.close();
     }
   }
-  setEventListeners(e) {
-    this._closeButton.addEventListener("click", () => {
-      this.close();
-    });
-    this._popupElement.addEventListener("click", (e) => {
-      e.preventDefault();
-      if (e.target === this._popupElement) {
+  setEventListeners() {
+    this._popupElement.addEventListener("click", (evt) => {
+      if (
+        evt.target.classList.contains("modal_opened") ||
+        evt.target.classList.contains("modal__close")
+      ) {
         this.close();
       }
     });

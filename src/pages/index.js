@@ -90,21 +90,25 @@ const cardList = new Section(
   },
   ".cards__list"
 );
-const popupSelector = ".modal";
+
+const popup = new Popup("#picture-close-button");
+popup.setEventListeners();
+
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
 });
-const modalWithFormInstance = new PopupWithForm({
-  popupSelector: "#picture-add-modal",
+const addCardModal = new PopupWithForm({
+  popupSelector: "#profile-add-modal",
   handleFormSubmit: handleAddCardFormSubmit,
 });
-modalWithFormInstance.open();
+
 const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
   handleFormSubmit: handleProfileEditSubmit,
 });
-editProfileModal.setEventListeners();
+cardAddButton.addEventListener("click", () => addCardModal.open());
+profileEditButton.addEventListener("click", () => editProfileModal.open());
 
 const imagePopup = new PopupWithImage({
   popupSelector: "#picture-add-modal",
