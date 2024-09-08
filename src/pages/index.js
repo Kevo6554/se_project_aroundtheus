@@ -95,6 +95,7 @@ const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
 });
+userInfo.setEventListeners();
 const addCardModal = new PopupWithForm({
   popupSelector: "#profile-add-modal",
   handleFormSubmit: handleAddCardFormSubmit,
