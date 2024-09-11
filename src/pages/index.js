@@ -52,7 +52,9 @@ addCardModal.setEventListeners();
 
 const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
-  handleFormSubmit: handleProfileEditSubmit,
+  handleFormSubmit: (handleProfileEditSubmit) => {
+    updateUserProfile(handleProfileEditSubmit);
+  },
 });
 editProfileModal.setEventListeners();
 cardAddButton.addEventListener("click", () => addCardModal.open());
@@ -70,6 +72,10 @@ profileEditValidator.enableValidation();
 
 function handleImageClick(data) {
   imagePopup.open(data);
+}
+function updateUserProfile({ name, description }) {
+  document.querySelector(".profile__title").textContent = name;
+  document.querySelector(".profile__description").textContent = description;
 }
 
 //closepopup
@@ -105,11 +111,9 @@ function closeModalOnEvent(event) {
 document.addEventListener("keydown", closeModalOnEscape);
 document.addEventListener("click", closeModalOnEv);*/
 
-function handleProfileEditSubmit(e) {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  closePopup(profileEditModal);
+function handleProfileEditSubmit(inputValues) {
+  userInfo.setUserInfo(inputValues.title, inputValues.description);
+  editProfilePopup.close();
 }
 
 function handleAddCardFormSubmit(e) {

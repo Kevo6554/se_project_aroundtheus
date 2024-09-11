@@ -8,6 +8,7 @@ class PopupWithForm extends Popup {
   }
 
   _getInputValues() {
+    this._inputList = this._popupElement.querySelectorAll(".modal__input");
     this._formValues = {};
     this._inputList.forEach((input) => {
       this._formValues[input.name] = input.value;
@@ -17,15 +18,14 @@ class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._popupForm.addEventListener("submit", (evt) => {
-      evt.preventDefault();
+    this._popupForm.addEventListener("submit", () => {
       this._handleFormSubmit(this._getInputValues());
-      this.close();
     });
   }
 
   close() {
     super.close();
+    this._popupForm.reset();
   }
 }
 
