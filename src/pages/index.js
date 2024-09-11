@@ -2,7 +2,7 @@ import Card from "../components/Cards.js";
 import FormValidator from "../components/FormValidator.js";
 import "../pages/index.css";
 import Popup from "../components/Popup.js";
-import PopupWithForm from "../components/Popupwithform.js";
+import PopupWithForm from "../components/PopupWithForm.js";
 import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
@@ -52,9 +52,7 @@ addCardModal.setEventListeners();
 
 const editProfileModal = new PopupWithForm({
   popupSelector: "#profile-edit-modal",
-  handleFormSubmit: (handleProfileEditSubmit) => {
-    updateUserProfile(handleProfileEditSubmit);
-  },
+  handleFormSubmit: handleProfileEditSubmit,
 });
 editProfileModal.setEventListeners();
 cardAddButton.addEventListener("click", () => addCardModal.open());
@@ -72,10 +70,6 @@ profileEditValidator.enableValidation();
 
 function handleImageClick(data) {
   imagePopup.open(data);
-}
-function updateUserProfile({ name, description }) {
-  document.querySelector(".profile__title").textContent = name;
-  document.querySelector(".profile__description").textContent = description;
 }
 
 //closepopup
@@ -111,21 +105,20 @@ function closeModalOnEvent(event) {
 document.addEventListener("keydown", closeModalOnEscape);
 document.addEventListener("click", closeModalOnEv);*/
 
-function handleProfileEditSubmit(inputValues) {
-  userInfo.setUserInfo(inputValues.title, inputValues.description);
-  editProfilePopup.close();
+function handleProfileEditSubmit() {
+  profileTitle.textContent = profileTitleInput.value;
+  profileDescription.textContent = profileDescriptionInput.value;
+  this.close();
 }
 
-function handleAddCardFormSubmit(e) {
-  e.preventDefault();
+function handleAddCardFormSubmit() {
   const name = cardTitleInput.value;
   const link = cardUrlInput.value;
   renderCard({
     name,
     link,
   });
-  closePopup(cardAddModal);
-  e.target.reset();
+  this.close();
   addCardFormValidator.toggleButtonState();
 }
 
