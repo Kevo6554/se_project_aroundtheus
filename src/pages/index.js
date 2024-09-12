@@ -72,43 +72,14 @@ function handleImageClick(data) {
   imagePopup.open(data);
 }
 
-//closepopup
-
-/*
-function closeModalOnEvent(event) {
-  const modals = document.querySelectorAll(".modal");
-
-  console.log("Event type:", event.type, event); // Log event type and event
-
-  if (event.type === "keydown" && event.key === "Escape") {
-    console.log("Escape key pressed");
-    modals.forEach((modal) => {
-      closePopup(modal);
-      console.log("Closed modal on Escape key");
-    });
-  }
-
-  if (event.type === "click") {
-    console.log("Click event target:", event.target); // Log event target
-    modals.forEach((modal) => {
-      if (!modal.contains(event.target)) {
-        closePopup(modal);
-        console.log("Closed modal on click outside");
-      }
-    });
-  }
-}
-*/
-
-// Add event listeners
-/*
-document.addEventListener("keydown", closeModalOnEscape);
-document.addEventListener("click", closeModalOnEv);*/
-
 function handleProfileEditSubmit() {
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
-  this.close();
+  const name = document.querySelector(".profile__title").value;
+  const about = document.querySelector(".profile__description").value;
+  userInfo.setUserInfo({ name, job: about });
+  editProfileModal.close();
+  document
+    .querySelector("#profile-edit-modal")
+    .addEventListener("submit", handleProfileEditSubmit);
 }
 
 function handleAddCardFormSubmit() {
