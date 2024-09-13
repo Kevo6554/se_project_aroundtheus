@@ -4,14 +4,10 @@ export default class Section {
     this._container = document.querySelector(containerSelector);
     this._renderer = renderer;
   }
+
   renderItems() {
-    this.clear();
-    this._renderedItems.forEach((item) => {
-      const card = item.isOwner
-        ? new UserCard(item, ".card-template_type_user")
-        : new DefaultCard(item, ".card-template_type_default");
-      const cardElement = card.generateCard();
-      this.setItem(cardElement);
+    this._items.forEach((item) => {
+      this._renderer(item);
     });
   }
 
