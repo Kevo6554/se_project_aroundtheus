@@ -29,13 +29,16 @@ const profileEditValidator = new FormValidator(
   profileEditForm
 );
 
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    const cardElement = createCard(item);
-    cardList.addItem(cardElement);
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (item) => {
+      const cardELement = createCard(item);
+      cardList.addItem(cardELement);
+    },
   },
-});
+  ".cards__list"
+);
 cardList.renderItems();
 
 const userInfo = new UserInfo({
@@ -87,15 +90,9 @@ function handleAddCardFormSubmit(formValues) {
   addCardModal.close();
 }
 
-function renderCard(data) {
-  cardListEl.prepend(createCard(data));
-}
-
 function createCard(data) {
   const card = new Card(data, "#card-template", handleImageClick);
   return card.generateCard();
 }
 
 //Event Listeners
-
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
