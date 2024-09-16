@@ -86,7 +86,6 @@ function handleAddCardFormSubmit(formValues) {
 
   console.log(formValues);
 
-  renderCard({ name, link }, cardList);
   addCardModal.close();
 }
 
