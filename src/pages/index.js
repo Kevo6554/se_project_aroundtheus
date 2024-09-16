@@ -84,6 +84,8 @@ function handleAddCardFormSubmit(formValues) {
   const name = formValues.name;
   const link = formValues.link;
 
+  const card = createCard({ name, link }); // create card
+  cardList.addItem(card);
   console.log(formValues);
 
   addCardModal.close();
