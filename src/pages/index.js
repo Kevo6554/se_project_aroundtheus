@@ -57,8 +57,16 @@ const editProfileModal = new PopupWithForm({
   handleFormSubmit: handleProfileEditSubmit,
 });
 editProfileModal.setEventListeners();
-cardAddButton.addEventListener("click", () => addCardModal.open());
-profileEditButton.addEventListener("click", () => editProfileModal.open());
+cardAddButton.addEventListener("click", () => {
+  addCardFormValidator.toggleButtonState();
+  addCardModal.open();
+});
+profileEditButton.addEventListener("click", () => {
+  const formValues = userInfo.getUserInfo(formValues.name, formValues.link);
+  profileTitleInput.value = formValues.name;
+  profileDescriptionInput.value = formValues.link;
+  editProfileModal.open();
+});
 
 const imagePopup = new PopupWithImage({
   popupSelector: "#picture-add-modal",
@@ -87,7 +95,7 @@ function handleAddCardFormSubmit(formValues) {
   const card = createCard({ name, link }); // create card
   cardList.addItem(card);
   console.log(formValues);
-
+  addFormElement.reset();
   addCardModal.close();
 }
 

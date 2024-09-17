@@ -25,7 +25,7 @@ class PopupWithForm extends Popup {
   }
 
   close() {
-    super.close();
+    this._popupForm.classlist.remove(".modal_opened");
   }
 }
 
