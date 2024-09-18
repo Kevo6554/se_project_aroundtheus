@@ -62,7 +62,7 @@ cardAddButton.addEventListener("click", () => {
   addCardModal.open();
 });
 profileEditButton.addEventListener("click", () => {
-  const formValues = userInfo.getUserInfo(formValues.name, formValues.link);
+  const formValues = userInfo.getUserInfo();
   profileTitleInput.value = formValues.name;
   profileDescriptionInput.value = formValues.link;
   editProfileModal.open();
@@ -89,13 +89,13 @@ function handleProfileEditSubmit(formValues) {
   editProfileModal.close();
 }
 function handleAddCardFormSubmit(formValues) {
-  const name = formValues.name;
+  const name = formValues.title;
   const link = formValues.link;
 
-  const card = createCard({ name, link }); // create card
+  const card = createCard({ name, link });
   cardList.addItem(card);
   console.log(formValues);
-  addFormElement.reset();
+  cardAddForm.reset();
   addCardModal.close();
 }
 
