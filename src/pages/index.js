@@ -64,7 +64,7 @@ cardAddButton.addEventListener("click", () => {
 profileEditButton.addEventListener("click", () => {
   const formValues = userInfo.getUserInfo();
   profileTitleInput.value = formValues.name;
-  profileDescriptionInput.value = formValues.link;
+  profileDescriptionInput.value = formValues.about;
   editProfileModal.open();
 });
 
@@ -84,7 +84,7 @@ function handleImageClick(data) {
 function handleProfileEditSubmit(formValues) {
   userInfo.setUserInfo({
     name: formValues.title,
-    about: formValues.description,
+    about: formValues.about,
   });
   editProfileModal.close();
 }
