@@ -149,7 +149,43 @@
     </div>
     <!--Comfirmation Modal-->
     <div id="confirmation-add-modal" class="modal">
-      <div class="modal__container"
+      <div class="modal__container">
+        <button id="confirmation-close-modal" class="modal__close"></button>
+        <h3 class="modal__heading">Are You Sure?</h3>
+        <form class="modal__form" id="confirmation-card-form">
+          <button class="modal__button modal__button_disabled" type="submit">
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!--Avatar Modal-->
+    <div id="edit-avatar-modal" class="modal">
+      <div class="modal__container">
+        <button class="modal__close" id="avatar-edit-modal"></button>
+        <h3 class="modal__heading">Chaneg Profile Picture</h3>
+        <form class="modal__form" id="edit-avatar-form">
+          <label class="modal__label"
+            ><input
+              class="modal__input modal__input_type_url"
+              type="url"
+              required
+              name="link"
+              id="avatar-input-url"
+              placeholder="Avatar link"
+            />
+            <span id="avatar-input-type-url" class="modal__error"></span>
+          </label>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            id="avatr-save-button"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
     </div>
     <!-- Picture Modal -->
     <div id="picture-add-modal" class="modal">
