@@ -40,12 +40,23 @@ const cardList = new Section(
   },
   ".cards__list"
 );
-cardList.renderItems();
+//cardList.renderItems();
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
+  avatarSelector: ".profile__image",
 });
+
+api
+  .setUserInfo(modalTitle, desc)
+  .then((res) => {
+    userInfo.getUserInfo(res.name, res.about);
+  })
+  .catch((err) => {
+    console.error("Error updating user info", err);
+    alert(err);
+  });
 
 const addCardModal = new PopupWithForm({
   popupSelector: "#profile-add-modal",
@@ -107,3 +118,12 @@ function createCard(data) {
 
 //Event Listeners
 // Test line
+const api = new Api("https://around-api.en.tripleten-services.com/v1", {
+  authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
+});
+console.log(api);
+
+api
+  .getInitialCards()
+  .then((res) => cardList.renderItems(res))
+  .catch((err) => alert(err));

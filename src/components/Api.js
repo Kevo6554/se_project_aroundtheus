@@ -19,17 +19,20 @@ export default class Api {
     });
   }
 
-  setUserInfo() {
+  setUserInfo(modalTitle, desc) {
     return fetch(`/users/me`, {
+      method: "PATCH",
       headers: {
         authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "Kevin",
+        name: modalTitle,
         about: desc,
       }),
-    });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   setUserAvatar({ link }) {
@@ -39,18 +42,18 @@ export default class Api {
     });
   }
 
-  uploadCard({ name, desc }) {
+  uploadCard({ name, link }) {
     return fetch(`/cards`, {
       method: "POST",
       headers: {
         authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: modalTitle, about: desc }),
+      body: JSON.stringify({ name: modalTitle, link: desc }),
     });
   }
 
-  unlikeCard() {
+  unlikeCard(cardId) {
     return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
@@ -63,7 +66,7 @@ export default class Api {
     });
   }
 
-  likeCard() {
+  likeCard(cardId) {
     return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
