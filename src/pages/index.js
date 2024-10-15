@@ -32,7 +32,6 @@ const profileEditValidator = new FormValidator(
 
 const cardList = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const cardELement = createCard(item);
       cardList.addItem(cardELement);
@@ -41,22 +40,16 @@ const cardList = new Section(
   ".cards__list"
 );
 //cardList.renderItems();
+const api = new Api("https://around-api.en.tripleten-services.com/v1", {
+  authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
+});
+console.log(api);
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
   avatarSelector: ".profile__image",
 });
-
-api
-  .setUserInfo(modalTitle, desc)
-  .then((res) => {
-    userInfo.getUserInfo(res.name, res.about);
-  })
-  .catch((err) => {
-    console.error("Error updating user info", err);
-    alert(err);
-  });
 
 const addCardModal = new PopupWithForm({
   popupSelector: "#profile-add-modal",
@@ -98,17 +91,33 @@ function handleProfileEditSubmit(formValues) {
     name: formValues.title,
     about: formValues.about,
   });
+  api
+    .setUserInfo(formValues.name, formValues.about)
+    .then((res) => {
+      userInfo.getUserInfo(res.name, res.about);
+    })
+    .catch((err) => {
+      console.error("Error updating user info", err);
+      alert(err);
+    });
   editProfileModal.close();
 }
 function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
   const link = formValues.link;
+  // Make API request to upload card
+  api
+    .uploadCard({ name, link })
+    .then((cardData) => {
+      const card = createCard(cardData);
 
-  const card = createCard({ name, link });
-  cardList.addItem(card);
-  console.log(formValues);
-  cardAddForm.reset();
-  addCardModal.close();
+      cardList.addItem(card);
+      addCardModal.close();
+      cardAddForm.reset();
+    })
+    .catch((error) => {
+      console.error(error);
+    });
 }
 
 function createCard(data) {
@@ -116,14 +125,45 @@ function createCard(data) {
   return card.generateCard();
 }
 
-//Event Listeners
-// Test line
-const api = new Api("https://around-api.en.tripleten-services.com/v1", {
-  authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
-});
-console.log(api);
-
 api
   .getInitialCards()
-  .then((res) => cardList.renderItems(res))
+  .then((res) => {
+    console.log(res);
+    cardList.renderItems(res);
+  })
+
   .catch((err) => alert(err));
+
+//Avatar
+const profileImageForm = document.querySelector("#edit-avatar-form");
+const profileFormValidator = new FormValidator(
+  validationConfig,
+  profileImageForm
+);
+profileFormValidator.enableValidation();
+
+function handleImageProfileEditSubmit(data) {
+  newProfileImageModal.handleLoad(true, "Saving...");
+  api
+    .setUserAvatar(data.link)
+    .then(() => {
+      userInfo.setProfileImage(data.link);
+      newProfileImage.close();
+      profileImageForm.reset();
+      profileFormValidator.disableButton();
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+const profileImageCover = document.querySelector(".profile__edit-image");
+profileImageCover.addEventListener("click", () => {
+  newProfileImageModal.open();
+});
+
+const newProfileImageModal = new PopupWithForm(
+  "#edit-avatar-form",
+  handleImageProfileEditSubmit
+);
+newProfileImageModal.setEventListeners();

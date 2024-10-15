@@ -23,7 +23,7 @@ export default class Api {
     return fetch(`/users/me`, {
       method: "PATCH",
       headers: {
-        authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
+        ...this._headers,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -38,19 +38,22 @@ export default class Api {
   setUserAvatar({ link }) {
     return fetch(`/users/me/avatar`, {
       method: "PATCH",
+      headers: { ...this._headers },
       body: JSON.stringify({ avatar: link }),
     });
   }
 
   uploadCard({ name, link }) {
-    return fetch(`/cards`, {
+    return fetch(`${this._baseURL}/cards`, {
       method: "POST",
       headers: {
-        authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
+        ...this._headers,
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: modalTitle, link: desc }),
-    });
+      body: JSON.stringify({ name: name, link: link }),
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   unlikeCard(cardId) {

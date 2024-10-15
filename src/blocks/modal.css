@@ -150,6 +150,22 @@
   margin: 0;
   top: calc(100% + 10px);
 }
+/* Confirmation */
+#confirmation-modal {
+  width: 430px;
+  height: 181px;
+}
+
+#confirmation-close-modal {
+  width: 385px;
+  margin-left: 20px;
+  margin-top: 30px;
+}
+
+#confirmation-card-form {
+  position: center;
+}
+
 @media screen and (max-width: 595px) {
   .modal__close {
     height: 26px;
