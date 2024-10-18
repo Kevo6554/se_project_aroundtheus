@@ -7,6 +7,7 @@ import Section from "../components/Section.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Api from "../components/Api.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
 import {
   initialCards,
   profileEditButton,
@@ -148,7 +149,7 @@ function handleImageProfileEditSubmit(data) {
     .setUserAvatar(data.link)
     .then(() => {
       userInfo.setProfileImage(data.link);
-      newProfileImage.close();
+      newProfileImageModal.close();
       profileImageForm.reset();
       profileFormValidator.disableButton();
     })
@@ -162,8 +163,30 @@ profileImageCover.addEventListener("click", () => {
   newProfileImageModal.open();
 });
 
-const newProfileImageModal = new PopupWithForm(
-  "#edit-avatar-form",
-  handleImageProfileEditSubmit
-);
+const newProfileImageModal = new PopupWithForm({
+  popupSelector: "#edit-avatar-modal",
+  handleImageProfileEditSubmit,
+});
 newProfileImageModal.setEventListeners();
+
+// confirmation
+
+function handleDeleteCard(card) {
+  confirmDeleteModal.setSubmitFunction(() => {
+    api
+      .handleDeleteCard(card._id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+  confirmDeleteModal.open();
+}
+
+const confirmDeleteModal = new PopupWithConfirmation(
+  "#confirmation-modal",
+  handleDeleteCard
+);
+confirmDeleteModal.setEventListeners();
