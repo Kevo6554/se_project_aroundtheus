@@ -4,15 +4,15 @@ class PopupWithConfirmation extends Popup {
   constructor({ popupSelector, handleConfirm }) {
     super({ popupSelector });
     this._handleConfirm = handleConfirm;
-    console.log(document.querySelector("._modal__form")); // Check what gets logged
+    console.log(document.querySelector(".modal__form")); // Check what gets logged
 
-    this._confirmButton = this._popupElement.querySelector(".modal__form");
+    this._confirmButton = this._popupElement.querySelector(
+      "#confirmation-add-modal"
+    );
   }
 
-  open(cardId, cardEl) {
-    super.open();
-    this._cardId = cardId;
-    this._cardEl = cardEl;
+  open(submitFunction) {
+    this._handleConfirm = submitFuction;
   }
 
   _setEventListeners() {

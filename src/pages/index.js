@@ -185,8 +185,28 @@ function handleDeleteCard(card) {
   confirmDeleteModal.open();
 }
 
-const confirmDeleteModal = new PopupWithConfirmation(
-  "#confirmation-modal",
-  handleDeleteCard
-);
+const confirmDeleteModal = new PopupWithConfirmation({
+  popupSelector: "#confirmation-modal",
+  handleConfirm: handleDeleteCard,
+});
 confirmDeleteModal.setEventListeners();
+
+function handleLikeCard(card) {
+  confirmLikeModal.setSubmitFunction(() => {
+    api
+      .handleLikeCard(card._id)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  });
+  confirmLikeModal.open();
+}
+
+const confirmLikeModal = new PopupWithConfirmation({
+  popupSelector: "#confirmation-modal",
+  handleConfirm: handleLikeCard,
+});
+confirmLikeModal.setEventListeners();
