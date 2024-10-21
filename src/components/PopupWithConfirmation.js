@@ -11,14 +11,27 @@ class PopupWithConfirmation extends Popup {
     );
   }
 
-  open(submitFunction) {
-    this._handleConfirm = submitFuction;
+  _removeCard(card) {
+    card.remove();
+    card = null;
+  }
+
+  setSubmitAction(handleSubmit) {
+    this._handleConfirm(handleSubmit);
+  }
+
+  setLoading(isLoading, text) {
+    if (isLoading) {
+      this._confirmButton.textContent = "Deleting...";
+    } else {
+      this._confirmButton.textContent = text;
+    }
   }
 
   _setEventListeners() {
     super.setEventListeners();
     this._confirmButton.addEventListener("click", () => {
-      this._handleConfirm(this._cardId, this._cardEl);
+      this._handleConfirm();
       this.close();
     });
   }

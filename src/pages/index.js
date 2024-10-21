@@ -122,7 +122,12 @@ function handleAddCardFormSubmit(formValues) {
 }
 
 function createCard(data) {
-  const card = new Card(data, "#card-template", handleImageClick);
+  const card = new Card(
+    data,
+    "#card-template",
+    handleImageClick,
+    handleDeleteCard
+  );
   return card.generateCard();
 }
 
@@ -172,14 +177,20 @@ newProfileImageModal.setEventListeners();
 // confirmation
 
 function handleDeleteCard(card) {
-  confirmDeleteModal.setSubmitFunction(() => {
+  confirmDeleteModal.setSubmitAction(() => {
+    confirmDeleteModal.setLoading(true, "Deleting");
     api
       .handleDeleteCard(card._id)
       .then((res) => {
         console.log(res);
+        cardData.handleDeleteCard();
+        confirmDeleteModal.close();
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        confirmDeleteModal.setLoading(false, "Yes");
       });
   });
   confirmDeleteModal.open();
@@ -192,7 +203,7 @@ const confirmDeleteModal = new PopupWithConfirmation({
 confirmDeleteModal.setEventListeners();
 
 function handleLikeCard(card) {
-  confirmLikeModal.setSubmitFunction(() => {
+  confirmLikeModal.setButtonState(() => {
     api
       .handleLikeCard(card._id)
       .then((res) => {

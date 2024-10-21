@@ -20,16 +20,14 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%=require('./images/jacques-cousteau.jpg')%>"
-            alt="Avatar"
-            class="profile__image"
-          />
-          <button
-            class="profile__edit-image"
-            type="button"
-            id="change-avatar-image"
-          ></button>
+          <div class="profile__image-container">
+            <img
+              src="<%=require('./images/jacques-cousteau.jpg')%>"
+              alt="Avatar"
+              class="profile__image"
+            />
+            <button class="profile__edit-image" ...></button>
+          </div>
           <div class="profile__info">
             <h1 class="profile__title">Kevin</h1>
             <button
