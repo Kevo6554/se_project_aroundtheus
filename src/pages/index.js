@@ -49,6 +49,7 @@ console.log(api);
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
+  profileImage: ".profile__image",
 });
 
 const addCardModal = new PopupWithForm({
@@ -94,7 +95,7 @@ function handleProfileEditSubmit(formValues) {
   api
     .setUserInfo(formValues.name, formValues.about)
     .then((res) => {
-      userInfo.getUserInfo(res.name, res.about);
+      userInfo.getUserInfo(res.name, res.about, res.image);
     })
     .catch((err) => {
       console.error("Error updating user info", err);

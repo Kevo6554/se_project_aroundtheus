@@ -35,12 +35,12 @@ export default class Api {
     );
   }
 
-  setUserAvatar({ link }) {
+  setUserAvatar(link) {
     console.log("Avatar link:", link);
 
     return fetch(`${this._baseURL}/users/me/avatar`, {
       method: "PATCH",
-      headers: { ...this._headers },
+      headers: { ...this._headers, "Content-Type": "application/json" },
       body: JSON.stringify({ avatar: link }),
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
