@@ -1,9 +1,9 @@
 import Popup from "./Popup.js";
 
 class PopupWithConfirmation extends Popup {
-  constructor({ popupSelector, handleConfirm }) {
+  constructor({ popupSelector }) {
     super({ popupSelector });
-    this._handleConfirm = handleConfirm;
+
     console.log(document.querySelector(".modal__form")); // Check what gets logged
 
     this._confirmButton = this._popupElement.querySelector(
@@ -17,7 +17,7 @@ class PopupWithConfirmation extends Popup {
   }
 
   setSubmitAction(handleSubmit) {
-    this._handleConfirm(handleSubmit);
+    this._handleConfirm = handleSubmit;
   }
 
   setLoading(isLoading, text) {
@@ -30,6 +30,7 @@ class PopupWithConfirmation extends Popup {
 
   _setEventListeners() {
     super.setEventListeners();
+
     this._confirmButton.addEventListener("click", () => {
       this._handleConfirm();
       this.close();

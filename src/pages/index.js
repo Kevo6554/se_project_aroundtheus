@@ -49,7 +49,6 @@ console.log(api);
 const userInfo = new UserInfo({
   nameSelector: ".profile__title",
   descriptionSelector: ".profile__description",
-  avatarSelector: ".profile__image",
 });
 
 const addCardModal = new PopupWithForm({
@@ -126,7 +125,7 @@ function createCard(data) {
     data,
     "#card-template",
     handleImageClick,
-    handleDeleteCard
+    handleDeleteCardSubmit
   );
   return card.generateCard();
 }
@@ -149,7 +148,7 @@ const profileFormValidator = new FormValidator(
 profileFormValidator.enableValidation();
 
 function handleImageProfileEditSubmit(data) {
-  newProfileImageModal.handleLoad(true, "Saving...");
+  newProfileImageModal.setLoading(true, "Saving...");
   api
     .setUserAvatar(data.link)
     .then(() => {
@@ -161,6 +160,7 @@ function handleImageProfileEditSubmit(data) {
     .catch((err) => {
       console.error(err);
     });
+  newProfileImageModal.setLoading(false, "Saving...");
 }
 
 const profileImageCover = document.querySelector(".profile__edit-image");
@@ -176,11 +176,10 @@ newProfileImageModal.setEventListeners();
 
 // confirmation
 
-function handleDeleteCard(card) {
+function handleDeleteCardSubmit(card) {
   confirmDeleteModal.setSubmitAction(() => {
-    confirmDeleteModal.setLoading(true, "Deleting");
     api
-      .handleDeleteCard(card._id)
+      .deleteCard(card._id)
       .then((res) => {
         console.log(res);
         cardData.handleDeleteCard();
@@ -188,9 +187,6 @@ function handleDeleteCard(card) {
       })
       .catch((err) => {
         console.error(err);
-      })
-      .finally(() => {
-        confirmDeleteModal.setLoading(false, "Yes");
       });
   });
   confirmDeleteModal.open();
@@ -198,7 +194,7 @@ function handleDeleteCard(card) {
 
 const confirmDeleteModal = new PopupWithConfirmation({
   popupSelector: "#confirmation-modal",
-  handleConfirm: handleDeleteCard,
+  handleConfirm: handleDeleteCardSubmit,
 });
 confirmDeleteModal.setEventListeners();
 
