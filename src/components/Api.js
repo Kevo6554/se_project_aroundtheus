@@ -36,11 +36,15 @@ export default class Api {
   }
 
   setUserAvatar({ link }) {
-    return fetch(`/users/me/avatar`, {
+    console.log("Avatar link:", link);
+
+    return fetch(`${this._baseURL}/users/me/avatar`, {
       method: "PATCH",
       headers: { ...this._headers },
       body: JSON.stringify({ avatar: link }),
-    });
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
   }
 
   uploadCard({ name, link }) {

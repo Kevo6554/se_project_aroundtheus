@@ -148,19 +148,19 @@ const profileFormValidator = new FormValidator(
 profileFormValidator.enableValidation();
 
 function handleImageProfileEditSubmit(data) {
-  newProfileImageModal.setLoading(true, "Saving...");
+  newProfileImageModal.setLoading(true);
+
   api
     .setUserAvatar(data.link)
     .then(() => {
-      userInfo.setProfileImage(data.link);
+      userInfo.getUserInfo(data.link);
       newProfileImageModal.close();
       profileImageForm.reset();
-      profileFormValidator.disableButton();
+      newProfileImageModal.setLoading(false);
     })
     .catch((err) => {
       console.error(err);
     });
-  newProfileImageModal.setLoading(false, "Saving...");
 }
 
 const profileImageCover = document.querySelector(".profile__edit-image");
@@ -170,7 +170,7 @@ profileImageCover.addEventListener("click", () => {
 
 const newProfileImageModal = new PopupWithForm({
   popupSelector: "#edit-avatar-modal",
-  handleImageProfileEditSubmit,
+  handleFormSubmit: handleImageProfileEditSubmit,
 });
 newProfileImageModal.setEventListeners();
 
@@ -198,12 +198,13 @@ const confirmDeleteModal = new PopupWithConfirmation({
 });
 confirmDeleteModal.setEventListeners();
 
-function handleLikeCard(card) {
+function likeCard(card) {
   confirmLikeModal.setButtonState(() => {
     api
       .handleLikeCard(card._id)
       .then((res) => {
         console.log(res);
+        card.setIsLiked(true);
       })
       .catch((err) => {
         console.error(err);
@@ -214,6 +215,6 @@ function handleLikeCard(card) {
 
 const confirmLikeModal = new PopupWithConfirmation({
   popupSelector: "#confirmation-modal",
-  handleConfirm: handleLikeCard,
+  handleConfirm: likeCard,
 });
 confirmLikeModal.setEventListeners();
