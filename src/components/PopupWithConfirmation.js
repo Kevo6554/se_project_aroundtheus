@@ -5,7 +5,7 @@ class PopupWithConfirmation extends Popup {
     super({ popupSelector });
 
     console.log(document.querySelector(".modal__form")); // Check what gets logged
-
+    this._formElement = this._popupElement.querySelector(".modal__form");
     this._confirmButton = this._popupElement.querySelector(
       "#confirmation-add-modal"
     );
@@ -20,10 +20,10 @@ class PopupWithConfirmation extends Popup {
     this._handleFormSubmit = handleSubmit;
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     super.setEventListeners();
-
-    this._confirmButton.addEventListener("click", (e) => {
+    console.log(this._formElement);
+    this._formElement.addEventListener("submit", (e) => {
       e.preventDefault();
       this._handleFormSubmit();
       this.close();

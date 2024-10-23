@@ -90,12 +90,12 @@ function handleImageClick(data) {
 function handleProfileEditSubmit(formValues) {
   userInfo.setUserInfo({
     name: formValues.title,
-    about: formValues.about,
+    about: formValues.description,
   });
   api
-    .setUserInfo(formValues.name, formValues.about)
+    .setUserInfo(formValues.title, formValues.description)
     .then((res) => {
-      userInfo.getUserInfo(res.name, res.about, res.image);
+      userInfo.getUserInfo(res.name, res.about);
     })
     .catch((err) => {
       console.error("Error updating user info", err);
@@ -153,8 +153,8 @@ function handleImageProfileEditSubmit(data) {
 
   api
     .setUserAvatar(data.link)
-    .then(() => {
-      userInfo.getUserInfo(data.link);
+    .then((res) => {
+      userInfo.updateProfileImage(res);
       newProfileImageModal.close();
       profileImageForm.reset();
       newProfileImageModal.setLoading(false);
@@ -178,29 +178,28 @@ newProfileImageModal.setEventListeners();
 // confirmation
 
 function handleDeleteCardSubmit(card) {
-  confirmDeleteModal.setSubmitAction(() => {
+  confirmModal.setSubmitAction(() => {
     api
       .deleteCard(card._id)
       .then((res) => {
         console.log(res);
-        cardData.handleDeleteCard();
-        confirmDeleteModal.close();
+        card.deleteCard();
+        confirmModal.close();
       })
       .catch((err) => {
         console.error(err);
       });
   });
-  confirmDeleteModal.open();
+  confirmModal.open(card);
 }
 
-const confirmDeleteModal = new PopupWithConfirmation({
+const confirmModal = new PopupWithConfirmation({
   popupSelector: "#confirmation-modal",
-  handleConfirm: handleDeleteCardSubmit,
 });
-confirmDeleteModal.setEventListeners();
+confirmModal.setEventListeners();
 
 function likeCard(card) {
-  confirmLikeModal.setButtonState(() => {
+  confirmModal.setButtonState(() => {
     api
       .handleLikeCard(card._id)
       .then((res) => {
@@ -211,11 +210,5 @@ function likeCard(card) {
         console.error(err);
       });
   });
-  confirmLikeModal.open();
+  confirmModal.open();
 }
-
-const confirmLikeModal = new PopupWithConfirmation({
-  popupSelector: "#confirmation-modal",
-  handleConfirm: likeCard,
-});
-confirmLikeModal.setEventListeners();

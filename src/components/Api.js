@@ -19,16 +19,16 @@ export default class Api {
     });
   }
 
-  setUserInfo(modalTitle, desc) {
-    return fetch(`/users/me`, {
+  setUserInfo(name, about) {
+    return fetch(`${this._baseURL}/users/me`, {
       method: "PATCH",
       headers: {
         ...this._headers,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: modalTitle,
-        about: desc,
+        name,
+        about,
       }),
     }).then((res) =>
       res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
@@ -60,7 +60,10 @@ export default class Api {
     );
   }
 
-  handleDeleteCard(cardId) {
+  deleteCard(cardId) {
+    console.log("Deleting card with ID:", cardId);
+
+    debugger;
     return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
@@ -73,7 +76,7 @@ export default class Api {
     });
   }
 
-  handleLikeCard(cardId) {
+  likeCard(cardId) {
     return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
