@@ -92,10 +92,12 @@ function handleProfileEditSubmit(formValues) {
     name: formValues.title,
     about: formValues.description,
   });
+  editProfileModal.setLoading(true);
   api
     .setUserInfo(formValues.title, formValues.description)
     .then((res) => {
       userInfo.getUserInfo(res.name, res.about);
+      editProfileModal.setLoading(false);
     })
     .catch((err) => {
       console.error("Error updating user info", err);
@@ -107,10 +109,12 @@ function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
   const link = formValues.link;
   // Make API request to upload card
+  cardAddForm.setLoading(true);
   api
     .uploadCard({ name, link })
     .then((cardData) => {
       const card = createCard(cardData);
+      cardAddForm.setLoading(false);
 
       cardList.addItem(card);
       addCardModal.close();
@@ -126,7 +130,8 @@ function createCard(data) {
     data,
     "#card-template",
     handleImageClick,
-    handleDeleteCardSubmit
+    handleDeleteCardSubmit,
+    likeCard
   );
   return card.generateCard();
 }
@@ -183,7 +188,7 @@ function handleDeleteCardSubmit(card) {
       .deleteCard(card._id)
       .then((res) => {
         console.log(res);
-        card.deleteCard();
+        card.remove();
         confirmModal.close();
       })
       .catch((err) => {
@@ -199,16 +204,13 @@ const confirmModal = new PopupWithConfirmation({
 confirmModal.setEventListeners();
 
 function likeCard(card) {
-  confirmModal.setButtonState(() => {
-    api
-      .handleLikeCard(card._id)
-      .then((res) => {
-        console.log(res);
-        card.setIsLiked(true);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  });
-  confirmModal.open();
+  api
+    .likeCard(card._id)
+    .then((res) => {
+      console.log(res);
+      card.setIsLiked(true);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }

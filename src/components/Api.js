@@ -63,8 +63,7 @@ export default class Api {
   deleteCard(cardId) {
     console.log("Deleting card with ID:", cardId);
 
-    debugger;
-    return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
+    return fetch(`${this._baseURL}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
     }).then((res) => {
@@ -76,9 +75,9 @@ export default class Api {
     });
   }
 
-  likeCard(cardId) {
+  likeCard(cardId, isLiked) {
     return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
-      method: "PUT",
+      method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
     }).then((res) => {
       if (res.ok) {
