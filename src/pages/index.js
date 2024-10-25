@@ -109,12 +109,12 @@ function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
   const link = formValues.link;
   // Make API request to upload card
-  cardAddForm.setLoading(true);
+  addCardModal.setLoading(true);
   api
     .uploadCard({ name, link })
     .then((cardData) => {
       const card = createCard(cardData);
-      cardAddForm.setLoading(false);
+      addCardModal.setLoading(false);
 
       cardList.addItem(card);
       addCardModal.close();
@@ -131,7 +131,8 @@ function createCard(data) {
     "#card-template",
     handleImageClick,
     handleDeleteCardSubmit,
-    likeCard
+    likeCard,
+    unlikeCard
   );
   return card.generateCard();
 }
@@ -209,6 +210,18 @@ function likeCard(card) {
     .then((res) => {
       console.log(res);
       card.setIsLiked(true);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+}
+
+function unlikeCard(card) {
+  api
+    .unlikeCard(card._id)
+    .then((res) => {
+      console.log(res);
+      card.setIsLiked(false);
     })
     .catch((err) => {
       console.error(err);

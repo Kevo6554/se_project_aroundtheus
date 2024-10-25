@@ -1,5 +1,12 @@
 export default class Card {
-  constructor(data, cardSelector, handleImageClick, deleteCard, likeCard) {
+  constructor(
+    data,
+    cardSelector,
+    handleImageClick,
+    deleteCard,
+    likeCard,
+    unlikeCard
+  ) {
     this.name = data.name;
     this.link = data.link;
     this._cardSelector = cardSelector;
@@ -8,6 +15,7 @@ export default class Card {
     this._id = data._id;
     this._isLiked = data.isLiked;
     this._likeCard = likeCard;
+    this._unlikeCard = unlikeCard;
   }
 
   _setEventListeners() {
@@ -38,9 +46,13 @@ export default class Card {
 
   setButtonState() {
     if (this._isLiked) {
-      this._likeButton.classList.add("card__like-button_active");
+      this._cardElement
+        .querySelector(".card__like-button")
+        .classList.add("card__like-button_active");
     } else {
-      this._likeButton.classList.remove("card__like-button_active");
+      this._cardElement
+        .querySelector(".card__like-button")
+        .classList.remove("card__like-button_active");
     }
   }
 
