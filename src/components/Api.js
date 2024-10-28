@@ -19,6 +19,15 @@ export default class Api {
     });
   }
 
+  getUserInfo() {
+    return fetch(`${this._baseURL}/users/me`, {
+      method: "GET",
+      headers: { ...this._headers },
+    }).then((res) =>
+      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+    );
+  }
+
   setUserInfo(name, about) {
     return fetch(`${this._baseURL}/users/me`, {
       method: "PATCH",

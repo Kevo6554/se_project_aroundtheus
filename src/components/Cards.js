@@ -73,7 +73,7 @@ export default class Card {
     this._cardElement.querySelector(".card__image").src = this.link;
     this._cardElement.querySelector(".card__image").alt = this.name;
     this._cardElement.querySelector(".card__title").textContent = this.name;
-
+    this.setButtonState();
     this._setEventListeners();
 
     return this._cardElement;

@@ -33,6 +33,10 @@
   width: 430px;
 }
 
+.modal__container-size {
+  height: 181px;
+}
+
 .modal__close {
   border: none;
   background-color: transparent;
@@ -93,7 +97,7 @@
   height: 50px;
   background-color: black;
   color: white;
-  margin-top: 20px;
+
   border-radius: 2px;
   font-size: 18px;
   line-height: 22px;
@@ -117,6 +121,10 @@
   height: auto;
   width: auto;
   background-color: transparent;
+}
+
+.modal__container_avatar {
+  height: 272px;
 }
 
 .modal__close-picture {
