@@ -150,6 +150,7 @@ api
   .getUserInfo()
   .then((res) => {
     userInfo.setUserInfo(res);
+    userInfo.updateProfileImage(res);
   })
   .catch((err) => alert(err));
 
@@ -169,7 +170,7 @@ function handleImageProfileEditSubmit(data) {
     .then((res) => {
       userInfo.updateProfileImage(res);
       newProfileImageModal.close();
-      profileImageForm.reset();
+      profileImageCover.reset();
       newProfileImageModal.setLoading(false);
     })
     .catch((err) => {
@@ -213,10 +214,10 @@ confirmModal.setEventListeners();
 
 function likeCard(card) {
   api
-    .likeCard(card._id)
+    .likeCard(card._id, card._isLiked)
     .then((res) => {
       console.log(res);
-      card.setIsLiked(true);
+      card.setIsLiked(res.isLiked);
     })
     .catch((err) => {
       console.error(err);
@@ -228,7 +229,7 @@ function unlikeCard(card) {
     .unlikeCard(card._id)
     .then((res) => {
       console.log(res);
-      card.setIsLiked(false);
+      card.setIsLiked();
     })
     .catch((err) => {
       console.error(err);
