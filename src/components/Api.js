@@ -11,21 +11,14 @@ export default class Api {
   getInitialCards() {
     return fetch(`${this._baseURL}/cards`, {
       headers: { ...this._headers },
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
-    });
+    }).then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseURL}/users/me`, {
       method: "GET",
       headers: { ...this._headers },
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    }).then(this._checkResponse);
   }
 
   setUserInfo(name, about) {
@@ -39,9 +32,7 @@ export default class Api {
         name,
         about,
       }),
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    }).then(this._checkResponse);
   }
 
   setUserAvatar(link) {
@@ -51,9 +42,7 @@ export default class Api {
       method: "PATCH",
       headers: { ...this._headers, "Content-Type": "application/json" },
       body: JSON.stringify({ avatar: link }),
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    }).then(this._checkResponse);
   }
 
   uploadCard({ name, link }) {
@@ -64,9 +53,11 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name: name, link: link }),
-    }).then((res) =>
-      res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-    );
+    })
+      .then(this._checkResponse)
+      .then((res) =>
+        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
+      );
   }
 
   deleteCard(cardId) {
@@ -75,25 +66,13 @@ export default class Api {
     return fetch(`${this._baseURL}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then(this._checkResponse);
   }
 
   likeCard(cardId, isLiked) {
     return fetch(`${this._baseURL}/cards/${cardId}/likes`, {
       method: isLiked ? "DELETE" : "PUT",
       headers: this._headers,
-    }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      } else {
-        return Promise.reject(`Error: ${res.status}`);
-      }
-    });
+    }).then(this._checkResponse);
   }
 }

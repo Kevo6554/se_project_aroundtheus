@@ -94,16 +94,21 @@ function handleProfileEditSubmit(formValues) {
   });
   editProfileModal.setLoading(true);
   api
+
     .setUserInfo(formValues.title, formValues.description)
+
     .then((res) => {
       userInfo.getUserInfo(res.name, res.about);
       editProfileModal.setLoading(false);
+      editProfileModal.close();
     })
     .catch((err) => {
       console.error("Error updating user info", err);
       alert(err);
+    })
+    .finally(() => {
+      console.log("Edit form complete");
     });
-  editProfileModal.close();
 }
 function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
@@ -111,7 +116,9 @@ function handleAddCardFormSubmit(formValues) {
   // Make API request to upload card
   addCardModal.setLoading(true);
   api
+
     .uploadCard({ name, link })
+
     .then((cardData) => {
       const card = createCard(cardData);
       addCardModal.setLoading(false);
@@ -122,6 +129,9 @@ function handleAddCardFormSubmit(formValues) {
     })
     .catch((error) => {
       console.error(error);
+    })
+    .finally(() => {
+      console.log("Add card complete");
     });
 }
 
@@ -139,6 +149,7 @@ function createCard(data) {
 
 api
   .getInitialCards()
+
   .then((res) => {
     console.log(res);
     cardList.renderItems(res);
@@ -148,6 +159,7 @@ api
 
 api
   .getUserInfo()
+
   .then((res) => {
     userInfo.setUserInfo(res);
     userInfo.updateProfileImage(res);
@@ -167,14 +179,18 @@ function handleImageProfileEditSubmit(data) {
 
   api
     .setUserAvatar(data.link)
+
     .then((res) => {
       userInfo.updateProfileImage(res);
       newProfileImageModal.close();
-      profileImageCover.reset();
+
       newProfileImageModal.setLoading(false);
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      console.log("Avatar edit submit");
     });
 }
 
@@ -194,7 +210,9 @@ newProfileImageModal.setEventListeners();
 function handleDeleteCardSubmit(card) {
   confirmModal.setSubmitAction(() => {
     api
+
       .deleteCard(card._id)
+
       .then((res) => {
         console.log(res);
         card.remove();
@@ -202,6 +220,9 @@ function handleDeleteCardSubmit(card) {
       })
       .catch((err) => {
         console.error(err);
+      })
+      .finally(() => {
+        console.log("Delete card complete");
       });
   });
   confirmModal.open(card);
@@ -214,18 +235,24 @@ confirmModal.setEventListeners();
 
 function likeCard(card) {
   api
+
     .likeCard(card._id, card._isLiked)
+
     .then((res) => {
       console.log(res);
       card.setIsLiked(res.isLiked);
     })
     .catch((err) => {
       console.error(err);
+    })
+    .finally(() => {
+      console.log("Like card complete");
     });
 }
 
 function unlikeCard(card) {
   api
+
     .unlikeCard(card._id)
     .then((res) => {
       console.log(res);

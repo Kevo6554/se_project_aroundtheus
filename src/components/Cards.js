@@ -18,7 +18,7 @@ export default class Card {
     this._unlikeCard = unlikeCard;
   }
 
-  _setEventListeners() {
+  setEventListeners() {
     this._likeButton = this._cardElement.querySelector(".card__like-button");
 
     this._likeButton.addEventListener("click", () => {
@@ -74,7 +74,7 @@ export default class Card {
     this._cardElement.querySelector(".card__image").alt = this.name;
     this._cardElement.querySelector(".card__title").textContent = this.name;
     this.setButtonState();
-    this._setEventListeners();
+    this.setEventListeners();
 
     return this._cardElement;
   }

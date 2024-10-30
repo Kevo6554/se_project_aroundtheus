@@ -11,7 +11,7 @@ class PopupWithConfirmation extends Popup {
     );
   }
 
-  _handleDeleteCard(card) {
+  handleDeleteCard(card) {
     card.remove();
     card = null;
   }
