@@ -163,6 +163,7 @@ api
   .then((res) => {
     userInfo.setUserInfo(res);
     userInfo.updateProfileImage(res);
+    document.querySelector("profile__info").textContent = res.name;
   })
   .catch((err) => alert(err));
 
