@@ -10,24 +10,23 @@ export default class Api {
 
   getInitialCards() {
     return fetch(`${this._baseURL}/cards`, {
-      headers: { ...this._headers },
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
   getUserInfo() {
     return fetch(`${this._baseURL}/users/me`, {
       method: "GET",
-      headers: { ...this._headers },
+      headers: this._headers,
     }).then(this._checkResponse);
   }
 
   setUserInfo(name, about) {
     return fetch(`${this._baseURL}/users/me`, {
       method: "PATCH",
-      headers: {
-        ...this._headers,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
+      "Content-Type": "application/json",
+
       body: JSON.stringify({
         name,
         about,
@@ -40,7 +39,8 @@ export default class Api {
 
     return fetch(`${this._baseURL}/users/me/avatar`, {
       method: "PATCH",
-      headers: { ...this._headers, "Content-Type": "application/json" },
+      headers: this._headers,
+      "Content-Type": "application/json",
       body: JSON.stringify({ avatar: link }),
     }).then(this._checkResponse);
   }
@@ -48,10 +48,8 @@ export default class Api {
   uploadCard({ name, link }) {
     return fetch(`${this._baseURL}/cards`, {
       method: "POST",
-      headers: {
-        ...this._headers,
-        "Content-Type": "application/json",
-      },
+      headers: this._headers,
+      "Content-Type": "application/json",
       body: JSON.stringify({ name: name, link: link }),
     }).then(this._checkResponse);
   }

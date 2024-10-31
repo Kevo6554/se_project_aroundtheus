@@ -257,7 +257,6 @@ function unlikeCard(card) {
     .unlikeCard(card._id)
     .then((res) => {
       console.log(res);
-      card.setIsLiked();
     })
     .catch((err) => {
       console.error(err);
