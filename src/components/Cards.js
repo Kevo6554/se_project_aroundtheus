@@ -20,10 +20,10 @@ export default class Card {
 
   setEventListeners() {
     this._likeButton = this._cardElement.querySelector(".card__like-button");
+    this._likeButton.classList.toggle("card__like-button_active");
 
     this._likeButton.addEventListener("click", () => {
       this._likeCard(this);
-      this._likeButton.classList.toggle("card__like-button_active");
     });
 
     this._cardElement

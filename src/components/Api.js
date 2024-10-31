@@ -53,11 +53,7 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ name: name, link: link }),
-    })
-      .then(this._checkResponse)
-      .then((res) =>
-        res.ok ? res.json() : Promise.reject(`Error: ${res.status}`)
-      );
+    }).then(this._checkResponse);
   }
 
   deleteCard(cardId) {

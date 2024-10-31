@@ -99,7 +99,7 @@ function handleProfileEditSubmit(formValues) {
 
     .then((res) => {
       userInfo.getUserInfo(res.name, res.about);
-      editProfileModal.setLoading(false);
+
       editProfileModal.close();
     })
     .catch((err) => {
@@ -108,6 +108,7 @@ function handleProfileEditSubmit(formValues) {
     })
     .finally(() => {
       console.log("Edit form complete");
+      editProfileModal.setLoading(false);
     });
 }
 function handleAddCardFormSubmit(formValues) {
@@ -121,7 +122,6 @@ function handleAddCardFormSubmit(formValues) {
 
     .then((cardData) => {
       const card = createCard(cardData);
-      addCardModal.setLoading(false);
 
       cardList.addItem(card);
       addCardModal.close();
@@ -132,6 +132,7 @@ function handleAddCardFormSubmit(formValues) {
     })
     .finally(() => {
       console.log("Add card complete");
+      addCardModal.setLoading(false);
     });
 }
 
@@ -163,7 +164,6 @@ api
   .then((res) => {
     userInfo.setUserInfo(res);
     userInfo.updateProfileImage(res);
-    document.querySelector("profile__info").textContent = res.name;
   })
   .catch((err) => alert(err));
 
@@ -184,14 +184,14 @@ function handleImageProfileEditSubmit(data) {
     .then((res) => {
       userInfo.updateProfileImage(res);
       newProfileImageModal.close();
-
-      newProfileImageModal.setLoading(false);
     })
     .catch((err) => {
       console.error(err);
     })
     .finally(() => {
       console.log("Avatar edit submit");
+
+      newProfileImageModal.setLoading(false);
     });
 }
 
