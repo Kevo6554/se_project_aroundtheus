@@ -11,12 +11,12 @@ class PopupWithForm extends Popup {
     }
   }
 
-  setLoading(isLoading) {
+  renderLoading(isLoading, loadingText = "Saving...") {
     this._submitBtn = this._popupElement.querySelector(".modal__button");
     if (isLoading) {
-      this._submitBtn.textContent = "Saving...";
+      this._submitBtn.textContent = loadingText;
     } else {
-      this._submitBtn.textContent = "Saving...";
+      this._submitBtn.textContent = "Save";
     }
   }
 

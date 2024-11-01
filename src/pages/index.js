@@ -89,18 +89,16 @@ function handleImageClick(data) {
   imagePopup.open(data);
 }
 function handleProfileEditSubmit(formValues) {
-  userInfo.setUserInfo({
-    name: formValues.title,
-    about: formValues.description,
-  });
-  editProfileModal.setLoading(true);
+  editProfileModal.renderLoading(true);
   api
 
     .setUserInfo(formValues.title, formValues.description)
 
-    .then((res) => {
-      userInfo.getUserInfo(res.name, res.about);
-
+    .then(() => {
+      userInfo.setUserInfo({
+        name: formValues.title,
+        about: formValues.description,
+      });
       editProfileModal.close();
     })
     .catch((err) => {
@@ -109,14 +107,14 @@ function handleProfileEditSubmit(formValues) {
     })
     .finally(() => {
       console.log("Edit form complete");
-      editProfileModal.setLoading(false);
+      editProfileModal.renderLoading(false);
     });
 }
 function handleAddCardFormSubmit(formValues) {
   const name = formValues.title;
   const link = formValues.link;
   // Make API request to upload card
-  addCardModal.setLoading(true);
+  addCardModal.renderLoading(true);
   api
 
     .uploadCard({ name, link })
@@ -133,7 +131,7 @@ function handleAddCardFormSubmit(formValues) {
     })
     .finally(() => {
       console.log("Add card complete");
-      addCardModal.setLoading(false);
+      addCardModal.renderLoading(false);
     });
 }
 
@@ -177,7 +175,7 @@ const profileFormValidator = new FormValidator(
 profileFormValidator.enableValidation();
 
 function handleImageProfileEditSubmit(data) {
-  newProfileImageModal.setLoading(true);
+  newProfileImageModal.renderLoading(true);
 
   api
     .setUserAvatar(data.link)
@@ -192,7 +190,7 @@ function handleImageProfileEditSubmit(data) {
     .finally(() => {
       console.log("Avatar edit submit");
 
-      newProfileImageModal.setLoading(false);
+      newProfileImageModal.renderLoading(false);
     });
 }
 

@@ -45,9 +45,9 @@ export default class Card {
 
   setButtonState() {
     if (this._isLiked) {
-      this._likeButton = this._cardElement.querySelector(".card__like-button");
+      this._likeButton.classList.add("card__like-button_active");
     } else {
-      this._likeButton = this._cardElement.querySelector(".card__like-button");
+      this._likeButton.classList.remove("card__like-button_active");
     }
   }
 
@@ -68,8 +68,8 @@ export default class Card {
     this._cardElement.querySelector(".card__image").src = this.link;
     this._cardElement.querySelector(".card__image").alt = this.name;
     this._cardElement.querySelector(".card__title").textContent = this.name;
-    this.setButtonState();
     this.setEventListeners();
+    this.setButtonState();
 
     return this._cardElement;
   }
