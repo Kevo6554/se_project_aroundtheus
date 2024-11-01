@@ -20,7 +20,6 @@ export default class Card {
 
   setEventListeners() {
     this._likeButton = this._cardElement.querySelector(".card__like-button");
-    this._likeButton.classList.toggle("card__like-button_active");
 
     this._likeButton.addEventListener("click", () => {
       this._likeCard(this);
@@ -46,13 +45,9 @@ export default class Card {
 
   setButtonState() {
     if (this._isLiked) {
-      this._cardElement
-        .querySelector(".card__like-button")
-        .classList.add("card__like-button_active");
+      this._likeButton = this._cardElement.querySelector(".card__like-button");
     } else {
-      this._cardElement
-        .querySelector(".card__like-button")
-        .classList.remove("card__like-button_active");
+      this._likeButton = this._cardElement.querySelector(".card__like-button");
     }
   }
 

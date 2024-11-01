@@ -43,6 +43,7 @@ const cardList = new Section(
 //cardList.renderItems();
 const api = new Api("https://around-api.en.tripleten-services.com/v1", {
   authorization: "f5e7da7f-f9a4-4037-8dd1-a9066e254adc",
+  "Content-Type": "application/json",
 });
 console.log(api);
 

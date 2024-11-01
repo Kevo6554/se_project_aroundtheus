@@ -50,6 +50,7 @@ export default class Api {
       method: "POST",
       headers: this._headers,
       "Content-Type": "application/json",
+
       body: JSON.stringify({ name: name, link: link }),
     }).then(this._checkResponse);
   }
