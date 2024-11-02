@@ -236,7 +236,7 @@ confirmModal.setEventListeners();
 function likeCard(card) {
   api
 
-    .likeCard(card._id, card._isLiked)
+    .likeCard(card._id, card.isLiked)
 
     .then((res) => {
       console.log(res);
